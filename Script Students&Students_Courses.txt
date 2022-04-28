@@ -1,0 +1,37 @@
+CREATE TABLE students
+(
+    studentId int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    admissionDate DATE NOT NULL,
+    userId int NOT NULL,
+    
+    CONSTRAINT userId 
+    FOREIGN KEY(userId) 
+    REFERENCES users(userId),
+    ) AUTO_INCREMENT = 6000;
+    
+
+CREATE TABLE students_courses
+(
+    detailId int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    studentId int PRIMARY KEY NOT NULL,
+    courseId int NOT NULL,
+    WQ_1 int NOT NULL,
+    WQ_2 int NOT NULL, 
+    WQ_3 int NOT NULL, 
+    OQ_1 int NOT NULL, 
+    OQ_2 int NOT NULL, 
+    OQ_3 int NOT NULL,
+    CP_1 int NOT NULL,
+    CP_2 int NOT NULL,
+    CP_3 int NOT NULL,
+    Final_Project int NOT NULL,
+    Final_Grade double,
+    
+    CONSTRAINT courseId 
+    FOREIGN KEY(courseId) 
+    REFERENCES courses(crn),
+
+    CONSTRAINT studentId
+    FOREIGN KEY(studentId)
+    REFERENCES students(studentId)
+    );
