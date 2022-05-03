@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {sepPeriodController} from "../controllers/sepPeriodController";
+import {sepPeriodController} from "../controllers/periodController";
 
 class SepPeriodRoutes{
 

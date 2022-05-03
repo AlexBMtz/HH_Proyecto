@@ -4,7 +4,7 @@ import pool from '../database';
 class StudentsCoursesController{
 
     public async index(req:Request, res:Response ){
-        const lists = await pool.query('SELECT cs.crn, c.courseName,f.frequency,p.program,sch.startingTime, sch.endingTime,sp.period,cs.studentId,cs.wq1,cs.wq2,cs.wq3,cs.oq1,cs.oq2,cs.oq3,cs.cp1,cs.cp2,cs.cp3,cs.finalProject FROM course_details AS cs, students AS s,courses AS c,frequencies f,programs p, schedules sch,periods sp WHERE cs.crn=c.crn AND cs.studentId=s.studentId AND c.frequencyId=f.frequencyId AND c.scheduleId=sch.scheduleId AND c.programId=p.programId AND c.periodId=sp.periodId');
+        const lists = await pool.query('SELECT cs.courseId, c.courseName,f.frequency,p.program,sch.startingTime, sch.endingTime,sp.period,cs.studentId,cs.wq_1,cs.wq_2,cs.wq_3,cs.oq_1,cs.oq_2,cs.oq_3,cs.cp_1,cs.cp_2,cs.cp_3,cs.final_project,cs.final_grade FROM course_details AS cs, students AS s,courses AS c,frequencies f,programs p, schedules sch,periods sp WHERE cs.courseId=c.crn AND cs.studentId=s.studentId AND c.frequencyId=f.frequencyId AND c.scheduleId=sch.scheduleId AND c.programId=p.programId AND c.periodId=sp.periodId');
         res.json(lists);
     }
 
@@ -32,7 +32,7 @@ class StudentsCoursesController{
     public async details(req:Request,res:Response):Promise<any>{
         //Destructurando una parte del objeto de Javascript
         const {id}=req.params;
-        const list = await pool.query('SELECT cs.crn, c.courseName,f.frequency,p.program,sch.startingTime, sch.endingTime,sp.period,cs.studentId,cs.wq1,cs.wq2,cs.wq3,cs.oq1,cs.oq2,cs.oq3,cs.cp1,cs.cp2,cs.cp3,cs.finalProject FROM course_details AS cs, students AS s,courses AS c,frequencies f,programs p, schedules sch,periods sp WHERE cs.crn=? AND cs.crn=c.crn AND cs.studentId=s.studentId AND c.frequencyId=f.frequencyId AND c.scheduleId=sch.scheduleId AND c.programId=p.programId AND c.periodId=sp.periodId',[id]);
+        const list = await pool.query('SELECT cs.courseId, c.courseName,f.frequency,p.program,sch.startingTime, sch.endingTime,sp.period,cs.studentId,cs.wq_1,cs.wq_2,cs.wq_3,cs.oq_1,cs.oq_2,cs.oq_3,cs.cp_1,cs.cp_2,cs.cp_3,cs.final_project,cs.final_grade FROM course_details AS cs, students AS s,courses AS c,frequencies f,programs p, schedules sch,periods sp WHERE cs.courseId=c.crn AND cs.studentId=s.studentId AND c.frequencyId=f.frequencyId AND c.scheduleId=sch.scheduleId AND c.programId=p.programId AND c.periodId=sp.periodId AND cs.courseId=?',[id]);
 
         if(list.length > 0){
             console.log(list[0]);
