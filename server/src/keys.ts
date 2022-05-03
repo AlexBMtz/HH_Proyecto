@@ -4,7 +4,7 @@ export default{
     database:{
         host:'localhost',
         user: 'root',
-        password:'UCME933LGM',
+        password:'12345',
         database:'dbhh'
     }
 }
