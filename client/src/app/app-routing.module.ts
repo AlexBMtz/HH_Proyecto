@@ -12,9 +12,11 @@ import { SchedulesListComponent } from './components/schedules-list/schedules-li
  import { ProgramsListComponent } from './components/programs-list/programs-list.component';
 // import { CourseListComponent } from './components/course-list/course-list.component';
 // import { CoursesFormComponent } from './components/courses-form/courses-form.component';
-// import { StudentListComponent } from './components/student-list/student-list.component';
-// import { StudentsFormComponent } from './components/students-form/students-form.component';
+import { StudentsListComponent } from './components/students-list/students-list.component';
+import { StudentsFormComponent } from './components/students-form/students-form.component';
 // import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
+import { UsersFormComponent } from './components/users-form/users-form.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
 
 const routes: Routes = [
   //
@@ -124,6 +126,21 @@ const routes: Routes = [
     path:'periods/edit/:periodId',
     component:PeriodsFormComponent
   },
+  //Users
+  {
+    path: 'users',
+    component:UsersListComponent
+  },
+
+  {
+    path: 'users/add',
+    component:UsersFormComponent
+  },
+
+  {
+    path: 'users',
+    component:UsersFormComponent
+  },
 
 //   //Courses
 //   {
@@ -141,21 +158,21 @@ const routes: Routes = [
 //     component:CoursesFormComponent
 //   },
 
-//   //Students
-//   {
-//     path:'students',
-//     component:StudentListComponent
-//   },
+  //Students
+  {
+    path:'students',
+    component:StudentsListComponent
+  },
   
-//   {
-//     path:'students/add',
-//     component:StudentsFormComponent
-//   },
+  {
+    path:'students/add',
+    component:StudentsFormComponent
+  },
 
-//   {
-//     path:'students/edit/:studentId',
-//     component:StudentsFormComponent
-//   },
+  {
+    path:'students/edit/:studentId',
+    component:StudentsFormComponent
+  },
 
 //   //StudentsCourses
 //   {

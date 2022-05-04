@@ -19,6 +19,10 @@ import { SchedulesFormComponent } from './components/schedules-form/schedules-fo
 import { SchedulesListComponent } from './components/schedules-list/schedules-list.component';
 import { ProgramsFormComponent } from './components/programs-form/programs-form.component';
 import { ProgramsListComponent } from './components/programs-list/programs-list.component';
+import { UsersFormComponent } from './components/users-form/users-form.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
+import { StudentsListComponent } from './components/students-list/students-list.component';
+import { StudentsFormComponent } from './components/students-form/students-form.component';
 // import { CoursesFormComponent } from './components/courses-form/courses-form.component';
 // import { CourseListComponent } from './components/course-list/course-list.component';
 // import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
@@ -36,7 +40,11 @@ import { ProgramsListComponent } from './components/programs-list/programs-list.
     SchedulesFormComponent,
     SchedulesListComponent,
     ProgramsFormComponent,
-    ProgramsListComponent
+    ProgramsListComponent,
+    UsersFormComponent,
+    UsersListComponent,
+    StudentsListComponent,
+    StudentsFormComponent
   ],
   imports: [
     BrowserModule,

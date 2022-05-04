@@ -1,0 +1,25 @@
+
+<div>
+    <a class="btn btn-success" routerLink="/students/add" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Estudiante</a>
+
+</div>
+
+<div class="col-md-4" *ngFor="let student of students">
+    <div class="card text-center">
+
+        <div class="card-header bg-dark text-white  d-flex justify-content-between align-items-center">
+                {{student.studentId}}
+                
+              <!--Borrar--> 
+               <button (click)="deleteStudent(student.studentId)" class="btn btn-danger"> <i class="fa-solid fa-trash-can"></i></button>
+            </div>
+        <!-- <img [src]="student.photoURL" alt = "Image" class = "card-img-top" width="720" height="420" >  -->
+            <div class="card-body">
+                <p>{{student.firstName}}</p>
+                <p>{{student.fatherLastName}}</p>
+               <a [routerLink]="['/students/edit',student.studentId]"  class="btn btn-info" > <i class="fa-solid fa-pen-to-square"></i> </a>
+        </div>
+
+    </div>
+
+</div>
