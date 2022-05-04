@@ -13,6 +13,8 @@ import { FormsModule } from '@angular/forms';
 import { FrequenciesListComponent } from './components/frequencies-list/frequencies-list.component';
 import { FrequenciesFormComponent } from './components/frequencies-form/frequencies-form.component';
 import { FrequenciesService } from './services/frequencies.service';
+import { PeriodsListComponent } from './components/periods-list/periods-list.component';
+import { PeriodsFormComponent } from './components/periods-form/periods-form.component';
 // import { CoursesFormComponent } from './components/courses-form/courses-form.component';
 // import { CourseListComponent } from './components/course-list/course-list.component';
 // import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
@@ -24,7 +26,9 @@ import { FrequenciesService } from './services/frequencies.service';
     AppComponent,
     NavigationComponent,
     FrequenciesListComponent,
-    FrequenciesFormComponent
+    FrequenciesFormComponent,
+    PeriodsListComponent,
+    PeriodsFormComponent
   ],
   imports: [
     BrowserModule,
