@@ -1,0 +1,52 @@
+<div class="col-md-4 offset-md-2">
+
+    <div class="card">
+        <div class="card-body">
+            <form >
+
+                <div class="form-group">
+
+                    <label for="FirstName">FirstName</label>
+                    <input type="text" class="form-control" name = "firstName"[(ngModel)]="user.firstName" placeholder="First Name">
+               
+                </div>
+            
+                <div class="form-group">
+
+                    <label for=""> FatherLastName </label>
+                    <input type="text" class="form-control" name="fatherLastName" [(ngModel)]="user.fatherLastName" placeholder="Father LastName">
+
+                </div>
+
+                
+                <div class="form-group">
+
+                    <label for=""> MotherLastName </label>
+                    <input type="text" class="form-control" name="motherLastName" [(ngModel)]="user.motherLastName" placeholder="Mother LastName">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for=""> Phone Number </label>
+                    <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="user.phoneNumber" placeholder="PhoneNumber">
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for=""> Email </label>
+                    <input type="text" class="form-control" name="email" [(ngModel)]="user.email" placeholder="Email">
+
+                </div>
+
+                <div class="form-group">
+
+                </div>
+                
+                <br>
+                <button class="btn-success" (click) = "edit? updateUser() :saveNewUser()">SAVE</button> 
+            </form>
+        </div>
+
+    </div>

@@ -1,0 +1,26 @@
+<div>
+    <a class="btn btn-success" routerLink="/users/add" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Usuario</a>
+    <!-- <a [routerLink]="['/rolesusers/add']" class="btn btn-info" routerLinkActivate="Active"> <i class="fa-solid fa-user-pen">Asignar Rol</i></a>  -->
+
+</div>
+
+ <div class="col-md-4" *ngFor="let user of users" >
+    <div class="card text-center" >
+
+        <div class="card-header bg-dark text-white  d-flex justify-content-between align-items-center">
+                {{user.UserId}} 
+                
+                
+                
+               <button (click)="deleteUser(user.UserId)" class="btn btn-danger"> <i class="fa-solid fa-trash-can"></i></button>
+               
+            </div>
+            <div class="card-body">
+                <p>{{user.firstName}}</p>
+                <p>{{user.fatherLastName}}</p>
+               <a [routerLink]="['/users/edit',user.UserId]"  class="btn btn-info" > <i class="fa-solid fa-pen-to-square"></i> </a>
+            
+             
+        </div>
+
+    </div> 

@@ -15,6 +15,10 @@ import { FrequenciesFormComponent } from './components/frequencies-form/frequenc
 import { FrequenciesService } from './services/frequencies.service';
 import { PeriodsListComponent } from './components/periods-list/periods-list.component';
 import { PeriodsFormComponent } from './components/periods-form/periods-form.component';
+import { UsersFormComponent } from './components/users-form/users-form.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
+import { StudentsListComponent } from './components/students-list/students-list.component';
+import { StudentsFormComponent } from './components/students-form/students-form.component';
 // import { CoursesFormComponent } from './components/courses-form/courses-form.component';
 // import { CourseListComponent } from './components/course-list/course-list.component';
 // import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
@@ -28,7 +32,11 @@ import { PeriodsFormComponent } from './components/periods-form/periods-form.com
     FrequenciesListComponent,
     FrequenciesFormComponent,
     PeriodsListComponent,
-    PeriodsFormComponent
+    PeriodsFormComponent,
+    UsersFormComponent,
+    UsersListComponent,
+    StudentsListComponent,
+    StudentsFormComponent
   ],
   imports: [
     BrowserModule,
