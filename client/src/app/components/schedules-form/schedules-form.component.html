@@ -1,0 +1,23 @@
+<div class="col-md-4 offset-md-2">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label>Hora de Inicio</label>
+                    <input placeholder="Starting Time" type="time" name="StartingTime" class="form-control" [(ngModel)]="schedule.startingTime" autofocus/>
+                </div>
+                <div class="form-group">
+                    <label>Hora de Término</label>
+                    <input placeholder="Ending Time" type="time" name="EndingTime" class="form-control" [(ngModel)]="schedule.endingTime" autofocus/>
+                </div>
+                <br>
+                <button class="btn btn-success" (click)="validateSchedule()" >Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card card-body text-center">
+        <h1>{{schedule.scheduleId}} | {{schedule.startingTime==''?'Hora Inicio':schedule.startingTime}} - {{schedule.endingTime==''?'Hora Final':schedule.endingTime}}</h1>
+    </div>
+</div>

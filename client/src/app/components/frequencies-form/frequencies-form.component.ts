@@ -17,6 +17,7 @@ export class FrequenciesFormComponent implements OnInit {
     frequency:''
   }
   edit:boolean=false;
+  rows:any=[];
 
   constructor(private frequenciesService:FrequenciesService, 
     private router:Router,
@@ -38,6 +39,34 @@ export class FrequenciesFormComponent implements OnInit {
         err => console.error(err)
       )
     }
+    this.frequenciesService.getFrequencies().subscribe(f=>{this.rows=f})
+  }
+
+  validateFrequency(){
+    let flag=true;
+    
+      console.log(this.rows);
+      for(let i=0; i<this.rows.length;i++)
+      {
+        if(this.rows[i]["frequency"]==this.frequency.frequency)
+        {
+          alert('La frequencia ya existe');
+          flag=false;
+          break;
+        }
+      }
+
+      if(flag)
+      {
+        if(this.edit)
+        {
+         this.updateFrequency();
+        }
+        else
+        {
+          this.saveNewFrequency();
+        }
+      }
   }
 
   saveNewFrequency()

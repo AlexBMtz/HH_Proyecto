@@ -1,0 +1,20 @@
+<div class="col-md-4 offset-md-2">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label>Programas</label>
+                    <input placeholder="Program" type="text" name="Period" class="form-control" [(ngModel)]="program.program" autofocus/>
+                </div>
+                <br>
+                <button class="btn btn-success" (click)="validateProgram()" >Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card card-body text-center">
+        <h1>{{program.programId}} | {{program.program==''?'Programa':program.program}}</h1>
+    </div>
+</div>
+

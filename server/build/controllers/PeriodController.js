@@ -17,13 +17,13 @@ const database_1 = __importDefault(require("../database"));
 class SepPeriodController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const sepPeriods = yield database_1.default.query('SELECT * FROM sep_periods');
+            const sepPeriods = yield database_1.default.query('SELECT * FROM periods');
             res.json(sepPeriods);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO sep_periods SET ?', [req.body]);
+            yield database_1.default.query('INSERT INTO periods SET ?', [req.body]);
             console.log(req.body);
             res.json({ 'message': "Nuevo Periodo Registrado" });
         });
@@ -32,7 +32,7 @@ class SepPeriodController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('DELETE FROM sep_periods WHERE periodId=?', [id]);
+            yield database_1.default.query('DELETE FROM periods WHERE periodId=?', [id]);
             res.json({ 'message': 'Eliminando Periodo ' + id });
         });
     }
@@ -40,7 +40,7 @@ class SepPeriodController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE sep_periods SET ? WHERE periodId=?', [req.body, id]);
+            yield database_1.default.query('UPDATE periods SET ? WHERE periodId=?', [req.body, id]);
             console.log(req.body);
             res.json({ 'message': 'Periodo ' + id + ' Modificado' });
         });
@@ -49,7 +49,7 @@ class SepPeriodController {
         return __awaiter(this, void 0, void 0, function* () {
             //Destructurando una parte del objeto de Javascript
             const { id } = req.params;
-            const sep_period = yield database_1.default.query('SELECT * FROM sep_periods WHERE periodId=?', [id]);
+            const sep_period = yield database_1.default.query('SELECT * FROM periods WHERE periodId=?', [id]);
             if (sep_period.length > 0) {
                 console.log(sep_period[0]);
                 return res.json(sep_period[0]);

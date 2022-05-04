@@ -1,0 +1,18 @@
+
+<div>
+    <a class="btn btn-success" routerLink="/programs/add" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Programa</a>
+</div>
+<div class="col-md-4" *ngFor="let program of programs">
+    <br>
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center" >
+            <p></p>
+            <button class="btn btn-danger" (click)="deleteProgram(program.programId)"><i class="fa-solid fa-minus"></i></button>
+        </div>
+        <div class="card-body">
+            <p>{{program.program}} 
+            </p>
+            <a [routerLink]="['/programs/edit',program.programId]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+        </div>
+    </div>
+</div>

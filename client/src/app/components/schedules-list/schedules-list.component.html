@@ -1,0 +1,18 @@
+<div>
+    <a class="btn btn-success" routerLink="/schedules/add" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Schedule</a>
+</div>
+<div class="col-md-4" *ngFor="let schedule of schedules">
+    <br>
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center" >
+            <p></p>
+            <button class="btn btn-danger" (click)="deleteSchedule(schedule.scheduleId)"><i class="fa-solid fa-minus"></i></button>
+        </div>
+        <div class="card-body">
+            <p>{{schedule.startingTime}} -
+               {{schedule.endingTime}} 
+            </p>
+            <a [routerLink]="['/schedules/edit',schedule.scheduleId]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+        </div>
+    </div>
+</div>

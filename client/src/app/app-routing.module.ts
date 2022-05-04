@@ -2,10 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
 // import { TeacherFormComponent } from './components/teachers-form/teachers-form.component'
-// import { SchedulesFormComponent } from './components/schedules-form/schedules-form.component';
+import { SchedulesFormComponent } from './components/schedules-form/schedules-form.component';
+import { SchedulesListComponent } from './components/schedules-list/schedules-list.component';
  import { FrequenciesFormComponent } from './components/frequencies-form/frequencies-form.component';
  import { FrequenciesListComponent } from './components/frequencies-list/frequencies-list.component';
-// import { SchedulesListComponent } from './components/schedules-list/schedules-list.component';
+ import { PeriodsFormComponent } from './components/periods-form/periods-form.component';
+ import { PeriodsListComponent } from './components/periods-list/periods-list.component';
+ import { ProgramsFormComponent } from './components/programs-form/programs-form.component';
+ import { ProgramsListComponent } from './components/programs-list/programs-list.component';
 // import { CourseListComponent } from './components/course-list/course-list.component';
 // import { CoursesFormComponent } from './components/courses-form/courses-form.component';
 // import { StudentListComponent } from './components/student-list/student-list.component';
@@ -41,20 +45,20 @@ const routes: Routes = [
 //   },
 
 //  //Schedules
-//   {
-//     path:'schedules',
-//     component:SchedulesListComponent
-//   },
+  {
+    path:'schedules',
+    component:SchedulesListComponent
+  },
   
-//   {
-//     path:'schedules/add',
-//     component:SchedulesFormComponent
-//   },
+  {
+    path:'schedules/add',
+    component:SchedulesFormComponent
+  },
 
-//   {
-//     path:'schedules/edit/:scheduleId',
-//     component:SchedulesFormComponent
-//   },
+  {
+    path:'schedules/edit/:scheduleId',
+    component:SchedulesFormComponent
+  },
 
    //Frequencies
 
@@ -71,6 +75,54 @@ const routes: Routes = [
   {
     path:'frequencies/edit/:frequencyId',
     component:FrequenciesFormComponent
+  },
+
+  //Periods
+  {
+    path:'periods',
+    component:PeriodsListComponent
+  },
+  
+  {
+    path:'periods/add',
+    component:PeriodsFormComponent
+  },
+
+  {
+    path:'periods/edit/:periodId',
+    component:PeriodsFormComponent
+  },
+
+  //Programs
+  {
+    path:'programs',
+    component:ProgramsListComponent
+  },
+  
+  {
+    path:'programs/add',
+    component:ProgramsFormComponent
+  },
+
+  {
+    path:'programs/edit/:programId',
+    component:ProgramsFormComponent
+  },
+
+  //Periods
+  {
+    path:'periods',
+    component:PeriodsListComponent
+  },
+  
+  {
+    path:'periods/add',
+    component:PeriodsFormComponent
+  },
+
+  {
+    path:'periods/edit/:periodId',
+    component:PeriodsFormComponent
   },
 
 //   //Courses

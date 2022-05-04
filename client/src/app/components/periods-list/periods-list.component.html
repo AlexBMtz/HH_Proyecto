@@ -1,1 +1,17 @@
-<p>periods-list works!</p>
+<div>
+    <a class="btn btn-success" routerLink="/periods/add" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Periodo</a>
+</div>
+<div class="col-md-4" *ngFor="let period of periods">
+    <br>
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center" >
+            <p></p>
+            <button class="btn btn-danger" (click)="deletePeriod(period.periodId)"><i class="fa-solid fa-minus"></i></button>
+        </div>
+        <div class="card-body">
+            <p>{{period.period}} 
+            </p>
+            <a [routerLink]="['/periods/edit',period.periodId]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+        </div>
+    </div>
+</div>
