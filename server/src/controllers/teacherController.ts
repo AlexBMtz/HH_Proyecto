@@ -9,7 +9,8 @@ class TeacherController{
     }
 
     public async create(req:Request, res:Response):Promise<void>{
-        await pool.query('INSERT INTO teachers SET ?', [req.body]);
+        let data = req.body
+        await pool.query('CALL insertarTeacher(?,?,?)',[data.pEmail,data.pRfc,data.pHiringDate]);
         console.log(req.body);
         res.json({'message':"Nuevo Teacher Registrado"});
     }

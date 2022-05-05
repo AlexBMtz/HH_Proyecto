@@ -7,7 +7,7 @@ export interface User
     motherLastName?: string;
     phoneNumber?: string;
     email?: string;
-    //password?:string;
-    
+    password?:string,
+    photourl?:string
 
 }

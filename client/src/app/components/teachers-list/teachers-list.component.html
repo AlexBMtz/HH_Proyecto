@@ -1,0 +1,24 @@
+<div>
+    <a class="btn btn-success" routerLink="/teachers/add" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Teacher</a>
+</div>
+<div class="col-md-4" *ngFor="let teacher of teachers">
+    <br>
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center" >
+            Teacher Id: {{teacher.teacherId}}
+            <button class="btn btn-danger" (click)="deleteTeacher(teacher.teacherId)"><i class="fa-solid fa-minus"></i></button>
+        </div>
+        <img [src]="teacher.photourl" class="card-img-top" width="720" height="420">
+        <div class="card-body">
+            <p>{{teacher.firstName}} 
+                {{teacher.fatherLastName}}
+                {{teacher.motherLastName}}
+            </p>
+            <p>{{teacher.rfc}} </p>
+            <p>{{teacher.email}} </p>
+            <p>{{teacher.phoneNumber}} </p>
+            <a [routerLink]="['/teachers/edit',teacher.teacherId,teacher.userId]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+        </div>
+    </div>
+</div>
+

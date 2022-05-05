@@ -1,0 +1,76 @@
+<div class="col-md-4 offset-md-2">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label>Nombre del Curso</label>
+                    <input placeholder="Course Name" type="text" name="courseName" class="form-control" [(ngModel)]="course.courseName" autofocus/>
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Inicio</label>
+                    <input placeholder="Starting Date" [(ngModel)]="course.startingDate" type="date" name="startingDate" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Horario</label>
+                    <select id="scheduleId" class="form-control" [(ngModel)]="course.scheduleId" name="scheduleId">  
+                        <option selected="" value=""></option>  
+                        <option [ngValue]="s.scheduleId" *ngFor="let s of schedules">  
+                         {{s.startingTime}}
+                         -
+                         {{s.endingTime}}
+                        </option>  
+                    </select> 
+                </div>
+                <div class="form-group">
+                    <label>Frecuencia</label>
+                    <select id="frequencyId" class="form-control" [(ngModel)]="course.frequencyId" name="frequencyId">  
+                        <option selected value=""></option>  
+                        <option [ngValue]="f.frequencyId" *ngFor="let f of frequencies">  
+                         {{f.frequency}}
+                        </option>  
+                    </select> 
+                </div>
+                <div class="form-group">
+                    <label>Teacher</label>
+                    <select id="teacherId" class="form-control" [(ngModel)]="course.teacherId" name="teacherId">  
+                        <option selected value=""></option>  
+                        <option [ngValue]="t.teacherId" *ngFor="let t of teachers">  
+                         {{t.firstName}}
+                         {{t.fatherLastName}}
+                         {{t.motherLastName}}
+                        </option>  
+                    </select> 
+                </div>
+                <div class="form-group">
+                    <label>Programa</label>
+                    <select id="programId" class="form-control" [(ngModel)]="course.programId" name="programId">  
+                        <option selected value=""></option>  
+                        <option [ngValue]="p.programId" *ngFor="let p of programs">  
+                         {{p.program}}
+                        </option>  
+                    </select> 
+                </div>
+                <div class="form-group">
+                    <label>Periodo</label>
+                    <select id="periodId" class="form-control" [(ngModel)]="course.periodId" name="periodId">  
+                        <option selected value=""></option>  
+                        <option [ngValue]="p.periodId" *ngFor="let p of periods">  
+                         {{p.period}}
+                        </option>  
+                    </select> 
+                </div>
+                <br>
+                <button class="btn btn-success" (click)="edit ? updateCourse(): saveNewCourse()" >Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card card-body text-center">
+        <h1>{{course.crn}} | {{course.courseName==''?'Curso':course.courseName}}</h1>
+        <p>{{course.startingDate | date:'yyyy-MM-dd'}}</p>
+    </div>
+</div>
+
+
+

@@ -38,21 +38,21 @@ export class UsersFormComponent implements OnInit {
 
   ngOnInit(): void 
   {
-    const params = this.activatedRoute.snapshot.params;
-   // console.log(params)
-    if(params['studentId']) 
-    {
-      this.userService.getUser(params['userId']).subscribe
-      (
-        res => 
-        {
-          console.log(res); 
-          this.user=res;
-          this.edit=true;
-        },
-        err =>console.error(err)
-      );
-    }
+  //   const params = this.activatedRoute.snapshot.params;
+  //  // console.log(params)
+  //   if(params['studentId']) 
+  //   {
+  //     this.userService.getUser(params['userId']).subscribe
+  //     (
+  //       res => 
+  //       {
+  //         console.log(res); 
+  //         this.user=res;
+  //         this.edit=true;
+  //       },
+  //       err =>console.error(err)
+  //     );
+  //   }
   }
 
   saveNewUser()

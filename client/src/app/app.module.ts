@@ -4,12 +4,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-// import { TeacherFormComponent } from './components/teachers-form/teachers-form.component';
-// import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
-// import {TeachersService} from './services/teachers.service';
 import { FormsModule } from '@angular/forms';
-// import { SchedulesFormComponent } from './components/schedules-form/schedules-form.component';
-// import { SchedulesListComponent } from './components/schedules-list/schedules-list.component';
 import { FrequenciesListComponent } from './components/frequencies-list/frequencies-list.component';
 import { FrequenciesFormComponent } from './components/frequencies-form/frequencies-form.component';
 import { FrequenciesService } from './services/frequencies.service';
@@ -23,6 +18,10 @@ import { UsersFormComponent } from './components/users-form/users-form.component
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import { StudentsFormComponent } from './components/students-form/students-form.component';
+import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
+import { TeachersFormComponent } from './components/teachers-form/teachers-form.component';
+import { CoursesFormComponent } from './components/courses-form/courses-form.component';
+import { CoursesListComponent } from './components/courses-list/courses-list.component';
 // import { CoursesFormComponent } from './components/courses-form/courses-form.component';
 // import { CourseListComponent } from './components/course-list/course-list.component';
 // import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
@@ -44,7 +43,11 @@ import { StudentsFormComponent } from './components/students-form/students-form.
     UsersFormComponent,
     UsersListComponent,
     StudentsListComponent,
-    StudentsFormComponent
+    StudentsFormComponent,
+    TeachersListComponent,
+    TeachersFormComponent,
+    CoursesFormComponent,
+    CoursesListComponent
   ],
   imports: [
     BrowserModule,

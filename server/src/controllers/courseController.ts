@@ -4,7 +4,7 @@ import pool from '../database';
 class CourseController{
 
     public async index(req:Request, res:Response ){
-        const courses = await pool.query('SELECT c.crn,c.courseName,c.startingDate,f.frequency,s.startingTime, s.endingTime, u.firstName, u.fatherLastName, u.motherLastName FROM courses c, frequencies f, schedules s, teachers t, users u WHERE c.frequencyId=f.frequencyId AND c.scheduleId=s.scheduleId AND c.teacherId=t.teacherId AND t.userId=u.userId');
+        const courses = await pool.query('SELECT c.crn,c.courseName,c.startingDate,f.frequency,s.startingTime, s.endingTime, u.firstName, u.fatherLastName, u.motherLastName, pr.program, p.period FROM courses c, frequencies f, schedules s, teachers t, users u, programs pr, periods p WHERE c.frequencyId=f.frequencyId AND c.scheduleId=s.scheduleId AND c.teacherId=t.teacherId AND t.userId=u.userId AND c.programId=pr.programId AND c.periodId=p.periodId');
         res.json(courses);
     }
 

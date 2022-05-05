@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-// import { TeacherListComponent } from './components/teacher-list/teacher-list.component';
-// import { TeacherFormComponent } from './components/teachers-form/teachers-form.component'
+import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
+import { TeachersFormComponent } from './components/teachers-form/teachers-form.component'
 import { SchedulesFormComponent } from './components/schedules-form/schedules-form.component';
 import { SchedulesListComponent } from './components/schedules-list/schedules-list.component';
  import { FrequenciesFormComponent } from './components/frequencies-form/frequencies-form.component';
@@ -10,8 +10,8 @@ import { SchedulesListComponent } from './components/schedules-list/schedules-li
  import { PeriodsListComponent } from './components/periods-list/periods-list.component';
  import { ProgramsFormComponent } from './components/programs-form/programs-form.component';
  import { ProgramsListComponent } from './components/programs-list/programs-list.component';
-// import { CourseListComponent } from './components/course-list/course-list.component';
-// import { CoursesFormComponent } from './components/courses-form/courses-form.component';
+import { CoursesListComponent } from './components/courses-list/courses-list.component';
+import { CoursesFormComponent } from './components/courses-form/courses-form.component';
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import { StudentsFormComponent } from './components/students-form/students-form.component';
 // import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
@@ -19,32 +19,32 @@ import { UsersFormComponent } from './components/users-form/users-form.component
 import { UsersListComponent } from './components/users-list/users-list.component';
 
 const routes: Routes = [
-  //
+  //Teachers
   {
     path:'',
     redirectTo:'/frequencies',
     pathMatch:'full'
   },
 
-//   {
-//     path:'teachers',
-//     component:TeacherListComponent
-//   },
+  {
+    path:'teachers',
+    component:TeachersListComponent
+  },
   
-//   {
-//     path:'teachers/add',
-//     component:TeacherFormComponent
-//   },
+  {
+    path:'teachers/add',
+    component:TeachersFormComponent
+  },
 
-//   {
-//     path:'teachers/edit/:teacherId',
-//     component:TeacherFormComponent
-//   },
-//   {
-//     path:'',
-//     redirectTo:'/teachers',
-//     pathMatch:'full'
-//   },
+  {
+    path:'teachers/edit/:teacherId/:userId',
+    component:TeachersFormComponent
+  },
+  {
+    path:'',
+    redirectTo:'/teachers',
+    pathMatch:'full'
+  },
 
 //  //Schedules
   {
@@ -142,21 +142,21 @@ const routes: Routes = [
     component:UsersFormComponent
   },
 
-//   //Courses
-//   {
-//     path:'courses',
-//     component:CourseListComponent
-//   },
+  //Courses
+  {
+    path:'courses',
+    component:CoursesListComponent
+  },
   
-//   {
-//     path:'courses/add',
-//     component:CoursesFormComponent
-//   },
+  {
+    path:'courses/add',
+    component:CoursesFormComponent
+  },
 
-//   {
-//     path:'courses/edit/:crn',
-//     component:CoursesFormComponent
-//   },
+  {
+    path:'courses/edit/:crn',
+    component:CoursesFormComponent
+  },
 
   //Students
   {

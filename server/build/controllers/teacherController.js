@@ -23,7 +23,8 @@ class TeacherController {
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            yield database_1.default.query('INSERT INTO teachers SET ?', [req.body]);
+            let data = req.body;
+            yield database_1.default.query('CALL insertarTeacher(?,?,?)', [data.pEmail, data.pRfc, data.pHiringDate]);
             console.log(req.body);
             res.json({ 'message': "Nuevo Teacher Registrado" });
         });
