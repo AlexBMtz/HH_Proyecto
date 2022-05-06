@@ -20,7 +20,8 @@
             <p>Program: {{course.program}}</p>
             <p>Period: {{course.period}}</p>
             <p>Teacher: {{course.firstName}} {{course.fatherLastName}} {{course.motherLastName}}</p>
-            <a [routerLink]="['/courses/edit',course.crn]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+            <a class="btn btn-info" [routerLink]="['/courses/edit', course.crn]"><i class="fa-solid fa-pen-to-square"></i></a>
+            <a style="margin-left: 10px;" class="btn btn-info" [routerLink]="['/courseDetails', course.crn]"><i class="fa-solid fa-list-ol"></i></a>
         </div>
     </div>
 </div>

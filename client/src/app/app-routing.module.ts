@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './components/home/home.component';
 import { TeachersListComponent } from './components/teachers-list/teachers-list.component';
 import { TeachersFormComponent } from './components/teachers-form/teachers-form.component'
 import { SchedulesFormComponent } from './components/schedules-form/schedules-form.component';
@@ -12,20 +13,19 @@ import { SchedulesListComponent } from './components/schedules-list/schedules-li
  import { ProgramsListComponent } from './components/programs-list/programs-list.component';
 import { CoursesListComponent } from './components/courses-list/courses-list.component';
 import { CoursesFormComponent } from './components/courses-form/courses-form.component';
+import { CourseDetailsListComponent } from './components/course-details-list/course-details-list.component';
+import { CourseDetailsFormComponent } from './components/course-details-form/course-details-form.component';
 import { StudentsListComponent } from './components/students-list/students-list.component';
 import { StudentsFormComponent } from './components/students-form/students-form.component';
-// import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
 import { UsersFormComponent } from './components/users-form/users-form.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 
 const routes: Routes = [
-  //Teachers
   {
-    path:'',
-    redirectTo:'/frequencies',
-    pathMatch:'full'
+    path: '',
+    component: HomeComponent
   },
-
+//Teachers
   {
     path:'teachers',
     component:TeachersListComponent
@@ -144,18 +144,29 @@ const routes: Routes = [
 
   //Courses
   {
-    path:'courses',
-    component:CoursesListComponent
+    path: 'courses',
+    component: CoursesListComponent
   },
-  
   {
-    path:'courses/add',
-    component:CoursesFormComponent
+    path: 'courses/add',
+    component: CoursesFormComponent
   },
-
   {
-    path:'courses/edit/:crn',
-    component:CoursesFormComponent
+    path: 'courses/edit/:id',
+    component: CoursesFormComponent
+  },
+  //CourseDetails
+  {
+    path: 'courseDetails/:id',
+    component: CourseDetailsListComponent
+  },
+  {
+    path: 'courseDetails/add/:crn',
+    component: CourseDetailsFormComponent
+  },
+  {
+    path: 'courseDetails/edit/:crn/:studentId',
+    component: CourseDetailsFormComponent
   },
 
   //Students
@@ -173,17 +184,12 @@ const routes: Routes = [
     path:'students/edit/:studentId',
     component:StudentsFormComponent
   },
-
-//   //StudentsCourses
-//   {
-//     path:'studentsCourses/add',
-//     component:StudentsCoursesFormComponent
-//   },
-
-//   {
-//     path:'studentsCourses/edit/:crn',
-//     component:StudentsCoursesFormComponent
-//   }
+  //Sin coincidencias
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  },
  ];
 
 @NgModule({
