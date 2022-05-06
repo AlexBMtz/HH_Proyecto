@@ -4,47 +4,47 @@
             <form>
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input placeholder="Name" type="text" name="Name" class="form-control" [(ngModel)]="user.firstName" autofocus/>
+                    <input placeholder="Name" type="text" name="Name" class="form-control" [(ngModel)]="teacher.firstName" autofocus/>
                 </div>
                 <div class="form-group">
                     <label>Apellido Paterno</label>
-                    <input placeholder="Father Last Name" type="text" name="FatherLastName" class="form-control" [(ngModel)]="user.fatherLastName" autofocus/>
+                    <input placeholder="Father Last Name" type="text" name="FatherLastName" class="form-control" [(ngModel)]="teacher.fatherLastName" autofocus/>
                 </div>
                 <div class="form-group">
                     <label>Apellido Materno</label>
-                    <input placeholder="Mother Last Name" type="text" name="MotherLastName" class="form-control" [(ngModel)]="user.motherLastName" autofocus/>
+                    <input placeholder="Mother Last Name" type="text" name="MotherLastName" class="form-control" [(ngModel)]="teacher.motherLastName" autofocus/>
                 </div>
                 <div class="form-group">
                     <label>RFC</label>
-                    <input placeholder="RFC" type="text" name="rfc" class="form-control" [(ngModel)]="teacher.pRfc" maxlength="13" autofocus/>
+                    <input placeholder="RFC" type="text" name="rfc" class="form-control" [(ngModel)]="teacher.rfc" maxlength="13" autofocus/>
                 </div>
                 <div class="form-group">
                     <label>Celular</label>
-                    <input placeholder="Phone Number" type="text" name="phoneNumber" class="form-control" [(ngModel)]="user.phoneNumber" maxlength="10" autofocus/>
+                    <input placeholder="Phone Number" type="text" name="phoneNumber" class="form-control" [(ngModel)]="teacher.phoneNumber" maxlength="10" autofocus/>
                 </div>
                 <div class="form-group">
                     <label>Correo Electrónico</label>
-                    <input placeholder="Email" type="email" name="email" class="form-control" [(ngModel)]="user.email" autofocus/>
+                    <input placeholder="Email" type="email" name="email" class="form-control" [(ngModel)]="teacher.email" autofocus/>
                 </div>
                 <div class="form-group">
                     <label>Fecha de Contratación</label>
-                    <input placeholder="Hiring Date" [(ngModel)]="teacher.pHiringDate" type="date" name="hiringDate" class="form-control"/>
+                    <input placeholder="Hiring Date" [(ngModel)]="teacher.hiringDate" type="date" name="hiringDate" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label>Foto</label>
-                    <input placeholder="Photo" type="url" name="photourl" [(ngModel)]="user.photourl" class="form-control"/>
+                    <input placeholder="Photo" type="url" name="photourl" [(ngModel)]="teacher.photourl" class="form-control"/>
                 </div>
                 <br>
-                <button class="btn btn-success" (click)="edit ? updateTeacher(): saveNewUser()" >Guardar</button>
+                <button class="btn btn-success" (click)="edit ? updateTeacher(): saveNewTeacher()" >Guardar</button>
             </form>
         </div>
     </div>
 </div>
 <div class="col-md-4">
     <div class="card card-body text-center">
-        <img class="card-img-top" [src]="user.photourl==''?'/assets/NoImage.jpg':user.photourl">
-        <h1>{{teacher.teacherId}} | {{user.firstName==''?'Nombre':user.firstName}} {{user.fatherLastName==''?'Apellido':user.fatherLastName}}</h1>
-        <p>{{teacher.pHiringDate | date:'yyyy-MM-dd'}}</p>
+        <img class="card-img-top" [src]="teacher.photourl==''?'/assets/NoImage.jpg':teacher.photourl">
+        <h1>{{teacher.teacherId}} | {{teacher.firstName==''?'Nombre':teacher.firstName}} {{teacher.fatherLastName==''?'Apellido':teacher.fatherLastName}}</h1>
+        <p>{{teacher.hiringDate | date:'yyyy-MM-dd'}}</p>
     </div>
 </div>
 

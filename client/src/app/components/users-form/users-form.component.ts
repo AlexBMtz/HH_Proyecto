@@ -15,13 +15,9 @@ export class UsersFormComponent implements OnInit {
 @HostBinding('class') classes = 'row';
   user: User=
   {
-    UserId:0,
-    firstName: '',
-    fatherLastName:'',
-    motherLastName:'',
     email:'',
-    phoneNumber:'',
-    roleId:1
+    roleId:0,
+    password:''
   }
   student : Student =
   {
@@ -69,14 +65,14 @@ export class UsersFormComponent implements OnInit {
 
   updateUser()
   {
-    this.userService.updateUser(this.user.UserId!,this.user).subscribe
-    (
-      res=>
-      {
-        console.log(res);
-        this.router.navigate
-      }
-    )
+  //   this.userService.updateUser(this.user.UserId!,this.user).subscribe
+  //   (
+  //     res=>
+  //     {
+  //       console.log(res);
+  //       this.router.navigate
+  //     }
+  //   )
   }
 
 }

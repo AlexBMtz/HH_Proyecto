@@ -17,14 +17,13 @@ const database_1 = __importDefault(require("../database"));
 class TeacherController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const teachers = yield database_1.default.query('SELECT U.*, T.* FROM teachers T, users U WHERE T.userId=U.userId');
+            const teachers = yield database_1.default.query('SELECT * FROM teachers');
             res.json(teachers);
         });
     }
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            let data = req.body;
-            yield database_1.default.query('CALL insertarTeacher(?,?,?)', [data.pEmail, data.pRfc, data.pHiringDate]);
+            yield database_1.default.query('INSERT INTO teachers SET ?', [req.body]);
             console.log(req.body);
             res.json({ 'message': "Nuevo Teacher Registrado" });
         });
@@ -50,7 +49,7 @@ class TeacherController {
         return __awaiter(this, void 0, void 0, function* () {
             //Destructurando una parte del objeto de Javascript
             const { id } = req.params;
-            const teacher = yield database_1.default.query('SELECT U.*, T.* FROM teachers T, users U WHERE T.userId=U.userId AND teacherId=?', [id]);
+            const teacher = yield database_1.default.query('SELECT * FROM teachers T WHERE teacherId=?', [id]);
             if (teacher.length > 0) {
                 console.log(teacher[0]);
                 return res.json(teacher[0]);

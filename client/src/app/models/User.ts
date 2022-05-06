@@ -1,13 +1,6 @@
 export interface User
 {
-    UserId? : number;
+    email? : string;
     roleId? : number;
-    firstName?: string;
-    fatherLastName?: string;
-    motherLastName?: string;
-    phoneNumber?: string;
-    email?: string;
-    password?:string,
-    photourl?:string
-
+    password?:string;
 }
