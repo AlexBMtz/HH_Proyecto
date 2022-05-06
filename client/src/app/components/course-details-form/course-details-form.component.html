@@ -1,0 +1,72 @@
+<div class="col-md-4 offset-md-2">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div *ngIf="!edit; else updateBlock">
+                    <div class="form-group">
+                        <label for="studentId">Estudiante:</label>
+                        <select class="form-select" placeholder="Estudiante" name="students" [(ngModel)]="courseDetail.studentId">
+                            <option [value]="student.studentId" *ngFor="let student of students">{{student.firstName}} {{student.fatherLastName}}</option>
+                        </select>
+                    </div>
+                </div>
+                <ng-template #updateBlock>
+                    <div class="form-group">
+                        <label for="studentId">Estudiante:</label>
+                        <input class="form-control" type="text" name="studentId" placeholder="Estudiante" [(ngModel)]="courseDetail.studentId" [disabled]="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="WQ_1">Writing Quiz 1:</label>
+                        <input class="form-control" type="number" name="WQ_1" placeholder="Writing Quiz 1" [(ngModel)]="courseDetail.WQ_1">
+                    </div>
+                    <div class="form-group">
+                        <label for="WQ_2">Writing Quiz 2:</label>
+                        <input class="form-control" type="number" name="WQ_2" placeholder="Writing Quiz 2" [(ngModel)]="courseDetail.WQ_2">
+                    </div>
+                    <div class="form-group">
+                        <label for="WQ_3">Writing Quiz 3:</label>
+                        <input class="form-control" type="number" name="WQ_3" placeholder="Writing Quiz 3" [(ngModel)]="courseDetail.WQ_3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="OQ_1">Oral Quiz 1:</label>
+                        <input class="form-control" type="number" name="OQ_1" placeholder="Oral Quiz 1" [(ngModel)]="courseDetail.OQ_1">
+                    </div>
+                    <div class="form-group">
+                        <label for="OQ_2">Oral Quiz 2:</label>
+                        <input class="form-control" type="number" name="OQ_2" placeholder="Oral Quiz 2" [(ngModel)]="courseDetail.OQ_2">
+                    </div>
+                    <div class="form-group">
+                        <label for="OQ_3">Oral Quiz 3:</label>
+                        <input class="form-control" type="number" name="OQ_3" placeholder="Oral Quiz 3" [(ngModel)]="courseDetail.OQ_3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="CP_1">Class Participation 1:</label>
+                        <input class="form-control" type="number" name="CP_1" placeholder="Class Participation 1" [(ngModel)]="courseDetail.CP_1">
+                    </div>
+                    <div class="form-group">
+                        <label for="CP_2">Class Participation 2:</label>
+                        <input class="form-control" type="number" name="CP_2" placeholder="Class Participation 2" [(ngModel)]="courseDetail.CP_2">
+                    </div>
+                    <div class="form-group">
+                        <label for="CP_3">Class Participation 3:</label>
+                        <input class="form-control" type="number" name="CP_3" placeholder="Class Participation 3" [(ngModel)]="courseDetail.CP_3">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="final_Project">Final Project:</label>
+                        <input class="form-control" type="number" name="final_Project" placeholder="Final Project" [(ngModel)]="courseDetail.final_Project">
+                    </div>
+                </ng-template>
+                <br>
+                <button class="btn btn-success" (click)="edit ? updateCourseDetail() : saveNewCourseDetail()"><i class="fa-solid fa-floppy-disk"></i></button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card card-body text-center">
+        <h1>Estudiante: {{courseDetail.studentId == '' ? 'Estudiante' : courseDetail.studentId}}</h1>
+    </div>
+</div>

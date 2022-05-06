@@ -1,8 +1,7 @@
 import { Router } from "express";
-import {studentsCoursesController} from "../controllers/courseDetailsController";
+import courseDetailsController from "../controllers/courseDetailsController";
 
-class StudentsCoursesRoutes{
-
+class courseDetailsRoutes{
     public router:Router = Router();
 
     constructor(){
@@ -10,14 +9,13 @@ class StudentsCoursesRoutes{
     }
 
     config():void{
-
-        this.router.get('/',studentsCoursesController.index);
-        this.router.post('/', studentsCoursesController.create);
-        this.router.delete('/:id',studentsCoursesController.delete);
-        this.router.put('/:id',studentsCoursesController.update);
-        this.router.get('/:id',studentsCoursesController.details);
+        this.router.get('/Course/:id',courseDetailsController.index);
+        this.router.post('/', courseDetailsController.create);
+        this.router.delete('/:id',courseDetailsController.delete);
+        this.router.put('/:id',courseDetailsController.update);
+        this.router.get('/:id',courseDetailsController.details);
     }
 }
 
-const studentsCoursesRoutes=new StudentsCoursesRoutes();
-export default studentsCoursesRoutes.router;
+const courseDetailRoutes=new courseDetailsRoutes();
+export default courseDetailRoutes.router;
