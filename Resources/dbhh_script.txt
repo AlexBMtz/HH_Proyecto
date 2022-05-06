@@ -92,7 +92,7 @@ CREATE TABLE courses
 	FOREIGN KEY (periodId) REFERENCES periods(periodId)
 )AUTO_INCREMENT=40000;
 
-CREATE TABLE course_details 
+CREATE TABLE students_courses
 (
 	studentId int NOT NULL PRIMARY KEY, 
 	courseId int NOT NULL, 

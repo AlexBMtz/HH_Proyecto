@@ -41,7 +41,7 @@ export class CourseDetailsFormComponent implements OnInit {
     console.log(params)
 
     this.crn = params['crn'];
-    this.detailId = params['detailId'];
+    this.detailId = params['studentId'];
     console.log(this.crn);
     console.log(this.detailId);
 
@@ -67,7 +67,7 @@ export class CourseDetailsFormComponent implements OnInit {
     this.courseDetailService.createCourseDetail(this.courseDetail).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['/CourseDetails', this.crn]);
+        this.router.navigate(['/courseDetails', this.crn]);
       },
       err => console.error(err)
     );
@@ -75,11 +75,12 @@ export class CourseDetailsFormComponent implements OnInit {
 
   updateCourseDetail(){
     this.courseDetail.final_Grade = ((this.courseDetail.WQ_1! + this.courseDetail.WQ_2! + this.courseDetail.WQ_3!)/3 + (this.courseDetail.OQ_1! + this.courseDetail.OQ_2! + this.courseDetail.OQ_3!)/3 + (this.courseDetail.CP_1! + this.courseDetail.CP_2! + this.courseDetail.CP_3!)/3 + this.courseDetail.final_Project!) /4;
+    this.courseDetail.final_Grade = +this.courseDetail.final_Grade.toFixed(2);
 
     this.courseDetailService.updateCourseDetail(this.courseDetail.studentId!, this.courseDetail).subscribe(
       res => {
         console.log(res);
-        this.router.navigate(['/CourseDetails', this.crn]);
+        this.router.navigate(['/courseDetails', this.crn]);
       },
       err => console.error(err)
     );

@@ -1,17 +1,17 @@
 <div style="padding-bottom: 10px;">
-    <a class="btn btn-success" [routerLink]="['/CourseDetails/add', id]" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Estudiante</a>
+    <a class="btn btn-success" [routerLink]="['/courseDetails/add', id]" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Estudiante</a>
 </div>
 <div class="col-md-4" *ngFor="let courseDetail of courseDetails" style="padding-top: 10px; padding-bottom: 10px;">
     <div class="card text-center">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center">
-            <button class="btn btn-danger" (click)="deleteCourse(courseDetail.detailId)"><i class="fa-solid fa-trash-can"></i></button>
+            <button class="btn btn-danger" (click)="deleteCourse(courseDetail.studentId)"><i class="fa-solid fa-trash-can"></i></button>
         </div>
         <div class="card-body">
             <h2>
-                Estudiante: {{courseDetail.student}}
+                Estudiante: {{courseDetail.studentId}}
             </h2>
             <p>
-                Calificacion Final: {{courseDetail.finalGrade == null ? ' No asignada' : courseDetail.finalGrade}}<br>
+                Calificacion Final: {{courseDetail.final_grade == null ? ' No asignada' : courseDetail.final_grade}}<br>
             </p>
             <a class="btn btn-info" [routerLink]="['/courseDetails/edit', id, courseDetail.studentId]"><i class="fa-solid fa-pen-to-square"></i></a>
         </div>
