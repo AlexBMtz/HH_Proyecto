@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/models/Course';
 import { CoursesService } from 'src/app/services/courses.service';
@@ -7,6 +7,7 @@ import { FrequenciesService } from 'src/app/services/frequencies.service';
 import { TeachersService } from 'src/app/services/teachers.service';
 import { ProgramsService } from 'src/app/services/programs.service';
 import { PeriodsService } from 'src/app/services/periods.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-courses-form',
@@ -30,11 +31,13 @@ export class CoursesFormComponent implements OnInit
   };
 
   edit:boolean=false;
+  crn:any;
   schedules:any=[];
   frequencies:any=[];
   teachers:any=[];
   programs:any=[];
   periods:any=[];
+  dateString:any;
   
   constructor(private coursesService:CoursesService,
     private router:Router,
@@ -43,7 +46,8 @@ export class CoursesFormComponent implements OnInit
     private frequenciesService:FrequenciesService,
     private teachersService:TeachersService,
     private programsService:ProgramsService,
-    private periodsService:PeriodsService) { }
+    private periodsService:PeriodsService,
+    @Inject(LOCALE_ID) private locale:string) { }
 
   ngOnInit(): void {
 
@@ -54,16 +58,21 @@ export class CoursesFormComponent implements OnInit
     this.periods=this.periodsService.getPeriods().subscribe(p=>{this.periods=p})
     
     const params=this.activatedRoute.snapshot.params;
+    console.log(params)
+    this.crn = params['id'];
 
-    if(params['crn'])
+    if(this.crn)
     {
-      this.coursesService.getCourse(params['crn']).subscribe
+      this.coursesService.getCourse(this.crn).subscribe
       (
         res => 
         {
           console.log(res)
           this.course=res;
           this.edit=true;
+          
+          this.dateString = formatDate(this.course.startingDate!, 'yyyy-MM-dd', this.locale)
+          console.log(this.dateString);
         },
         err => console.error(err)
       )
@@ -84,7 +93,7 @@ export class CoursesFormComponent implements OnInit
 
   updateCourse(){
     //console.log(this.teacher);
-    //! -->Utilizado cuando se pueden esperar distintos tipos de un dato
+    //! --> Utilizado cuando se pueden esperar distintos tipos de un dato
     this.coursesService.updateCourse(this.course.crn!,this.course).subscribe(
       res =>{
         console.log(res);

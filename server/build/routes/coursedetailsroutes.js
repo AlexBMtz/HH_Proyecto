@@ -11,6 +11,7 @@ class courseDetailsRoutes {
         this.config();
     }
     config() {
+        this.router.get('/', courseDetailsController_1.default.list);
         this.router.get('/Course/:id', courseDetailsController_1.default.index);
         this.router.post('/', courseDetailsController_1.default.create);
         this.router.delete('/:id', courseDetailsController_1.default.delete);

@@ -29,7 +29,9 @@ export class CourseDetailsFormComponent implements OnInit {
   };
 
   students : any = [];
+  details : any = [];
   edit : boolean = false;
+  exists : boolean = false;
   crn : any = null;
   detailId : any = null;
 
@@ -57,6 +59,7 @@ export class CourseDetailsFormComponent implements OnInit {
     }
 
     this.fillStudents()
+    this.fillCourse_Details()
   }
 
   saveNewCourseDetail() {
@@ -64,13 +67,29 @@ export class CourseDetailsFormComponent implements OnInit {
     this.courseDetail.courseId = this.crn;
 
     console.log(this.courseDetail);
-    this.courseDetailService.createCourseDetail(this.courseDetail).subscribe(
-      res => {
-        console.log(res);
-        this.router.navigate(['/courseDetails', this.crn]);
-      },
-      err => console.error(err)
-    );
+    
+    for (let i = 0; i < this.details.length; i++) {
+      if (this.details[i].studentId == this.courseDetail.studentId) {
+        this.exists = true;
+        break;
+      }
+      else{
+        this.exists = false;
+      }
+    }
+
+    if(!this.exists){
+      this.courseDetailService.createCourseDetail(this.courseDetail).subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/courseDetails', this.crn]);
+        },
+        err => console.error(err)
+      );
+    }
+    else{
+      alert("No puede inscribir a un alumno ya inscrito en este u otro curso.")
+    }
   }
 
   updateCourseDetail(){
@@ -90,6 +109,16 @@ export class CourseDetailsFormComponent implements OnInit {
     this.studentService.getStudents().subscribe(
       res => {
         this.students = res;
+        console.log(res)
+      },
+      err => console.error(err)
+    )
+  }
+
+  fillCourse_Details(){
+    this.courseDetailService.getAllCourseDetails().subscribe(
+      res => {
+        this.details = res;
         console.log(res)
       },
       err => console.error(err)

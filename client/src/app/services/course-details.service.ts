@@ -14,6 +14,10 @@ export class CourseDetailsService {
     return this.http.get("http://localhost:5000/api/courseDetails/Course/" + id);
   }
 
+  getAllCourseDetails(){
+    return this.http.get("http://localhost:5000/api/courseDetails/");
+  }
+
   getCourseDetail(id : string){
     return this.http.get("http://localhost:5000/api/courseDetails/" + id);
   }

@@ -9,6 +9,7 @@ class courseDetailsRoutes{
     }
 
     config():void{
+        this.router.get('/',courseDetailsController.list);
         this.router.get('/Course/:id',courseDetailsController.index);
         this.router.post('/', courseDetailsController.create);
         this.router.delete('/:id',courseDetailsController.delete);

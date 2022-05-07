@@ -1,5 +1,5 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CourseDetailsService } from 'src/app/services/course-details.service';
 
 @Component({
@@ -11,17 +11,17 @@ export class CourseDetailsListComponent implements OnInit {
   @HostBinding('class') classes = 'row';
   courseDetails : any = [];
   id : any;
-  constructor(private courseDetailService : CourseDetailsService, private route : ActivatedRoute) { }
+  constructor(private courseDetailService : CourseDetailsService, private route : ActivatedRoute, private router : Router) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id')
     this.getListCourseDetails(this.id);
   }
   
-  getListCourseDetails(id : string) : void {
-    this.courseDetailService.getCourseDetails(id).subscribe(
+  getListCourseDetails(studentId : string) : void {
+    this.courseDetailService.getCourseDetails(studentId).subscribe(
       res => {
-        console.log("ID: " + id)
+        console.log("ID: " + studentId)
         console.log(res)
         this.courseDetails = res
       },
@@ -29,12 +29,12 @@ export class CourseDetailsListComponent implements OnInit {
     );
   }
 
-  deleteCourse(id : string){
-    console.log(id);
-    this.courseDetailService.deleteCourseDetail(id).subscribe(
+  deleteCourse(studentId : string){
+    console.log(studentId);
+    this.courseDetailService.deleteCourseDetail(studentId).subscribe(
       res =>{
         console.log(res)
-        this.getListCourseDetails(id);
+        window.location.reload();
       },
       err => console.log(err)
     );

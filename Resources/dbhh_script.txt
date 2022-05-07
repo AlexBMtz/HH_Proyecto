@@ -111,3 +111,13 @@ CREATE TABLE students_courses
 	FOREIGN KEY (courseId) REFERENCES courses(crn), 
 	FOREIGN KEY (studentId) REFERENCES students(studentId) 
 );
+
+
+
+--- LINK ELIMINACION EN CASCADA PHPMYADMIN ---
+https://stackoverflow.com/questions/13105019/how-to-add-on-delete-cascade-and-on-update-restrict-using-phpmyadmin
+
+1.- En tabla students_courses ir a la seccion de Estructura.
+2.- Luego acceder a la Vista de relaciones.
+3.- En la restriccion que relaciona con tabla courses, cambiar el ON DELETE a CASCADE
+4.- Guardar cambios
