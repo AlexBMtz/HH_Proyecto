@@ -17,7 +17,7 @@ const database_1 = __importDefault(require("../database"));
 class StudentController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const students = yield database_1.default.query('SELECT U.*, S.* FROM students S, users U WHERE S.userId=U.userId');
+            const students = yield database_1.default.query('SELECT * FROM students');
             res.json(students);
         });
     }
@@ -49,7 +49,7 @@ class StudentController {
         return __awaiter(this, void 0, void 0, function* () {
             //Destructurando una parte del objeto de Javascript
             const { id } = req.params;
-            const program = yield database_1.default.query('SELECT U.*, S.* FROM students S, users U WHERE SELECT U.*, S.* FROM students S, users U WHERE S.userId=U.userId AND studentId=?', [id]);
+            const program = yield database_1.default.query('SELECT * FROM students S WHERE studentId=?', [id]);
             if (program.length > 0) {
                 console.log(program[0]);
                 return res.json(program[0]);

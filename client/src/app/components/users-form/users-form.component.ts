@@ -19,12 +19,12 @@ export class UsersFormComponent implements OnInit {
     roleId:0,
     password:''
   }
-  student : Student =
-  {
-    admissionDate: new Date(),
-    studentId:0,
-    userId:0
-  }
+  // student : Student =
+  // {
+  //   admissionDate: new Date(),
+  //   studentId:0,
+  //   userId:0
+  // }
   edit:boolean = false;
 
   constructor(private userService: UsersService, private router:Router, private studentService: StudentsService, private activatedRoute : ActivatedRoute) 

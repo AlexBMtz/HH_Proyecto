@@ -3,6 +3,8 @@ import { StudentsService } from 'src/app/services/students.service';
 import { Student } from 'src/app/models/Student';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ThisReceiver } from '@angular/compiler';
+import { User } from 'src/app/models/User';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-students-form',
@@ -11,14 +13,27 @@ import { ThisReceiver } from '@angular/compiler';
 })
 export class StudentsFormComponent implements OnInit {
 @HostBinding ('class') classes = 'row';
+user:User=
+{
+  email:'',
+  roleId:2,
+  password:'12345'
+
+}
 student : Student=
 {
   studentId:0,
+  firstName:'',
+  fatherLastName:'',
+  motherLastName:'',
+  email:'',
+  phoneNumber:'',
+  photourl:'',
   admissionDate: new Date(),
-  userId:0,
+
 };
 edit:boolean = false;
-  constructor(private studentsService : StudentsService, private router:Router, private activatedRoute: ActivatedRoute) 
+  constructor(private studentsService : StudentsService,private usersService:UsersService, private router:Router, private activatedRoute: ActivatedRoute) 
   {
 
   }
@@ -45,15 +60,24 @@ edit:boolean = false;
    saveNewStudent()
   {
   
-   //console.log(this.student)
-  // delete this.student.studentId;
-   //delete this.student.admissionDate;
+
+    delete this.student.studentId;
     this.studentsService.saveStudent(this.student).subscribe(
       res => 
       {
-        console.log(res); 
-      this.router.navigate(['/students'])},
+        console.log(this.student); 
+        console.log(res);
+      },
       err =>console.error(err)
+      );
+
+      this.user.email=this.user.email;
+      this.usersService.saveUser(this.user).subscribe(res=>{
+        console.log(this.student)
+        console.log(res);
+        this.router.navigate(['/students'])
+      },
+      err => console.error(err)
       );
 
   } 
@@ -66,7 +90,8 @@ edit:boolean = false;
     res => 
     {
       console.log(res); 
-    this.router.navigate(['/students'])},
+    this.router.navigate(['/students'])
+     },
     err =>console.error(err)
     );
     

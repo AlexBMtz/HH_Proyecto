@@ -1,1 +1,48 @@
-<p>students-form works!</p>
+<div class="col-md-4 offset-md-2">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input placeholder="Name" type="text" name="Name" class="form-control" [(ngModel)]="student.firstName" autofocus/>
+                </div>
+                <div class="form-group">
+                    <label>Apellido Paterno</label>
+                    <input placeholder="Father Last Name" type="text" name="FatherLastName" class="form-control" [(ngModel)]="student.fatherLastName" autofocus/>
+                </div>
+                <div class="form-group">
+                    <label>Apellido Materno</label>
+                    <input placeholder="Mother Last Name" type="text" name="MotherLastName" class="form-control" [(ngModel)]="student.motherLastName" autofocus/>
+                </div>
+
+                <div class="form-group">
+                    <label>Celular</label>
+                    <input placeholder="Phone Number" type="text" name="phoneNumber" class="form-control" [(ngModel)]="student.phoneNumber" maxlength="10" autofocus/>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input placeholder="Email" type="email" name="email" class="form-control" [(ngModel)]="student.email" autofocus/>
+                </div>
+                <div class="form-group">
+                    <label>Fecha de Admisión</label>
+                    <input placeholder="Hiring Date" [(ngModel)]="student.admissionDate" type="date" name="admissionDate" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label>Foto</label>
+                    <input placeholder="Photo" type="url" name="photourl" [(ngModel)]="student.photourl" class="form-control"/>
+                </div>
+                <br>
+                <button class="btn btn-success" (click)="edit ? updateStudent(): saveNewStudent()" >Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-4">
+    <div class="card card-body text-center">
+        <img class="card-img-top" [src]="student.photourl==''?'/assets/NoImage.jpg':student.photourl">
+        <h1>{{student.studentId}} | {{student.firstName==''?'Nombre':student.firstName}} {{student.fatherLastName==''?'Apellido':student.fatherLastName}}</h1>
+        <p>{{student.admissionDate | date:'yyyy-MM-dd'}}</p>
+    </div>
+</div>
+
+

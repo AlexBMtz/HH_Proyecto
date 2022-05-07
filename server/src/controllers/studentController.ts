@@ -4,7 +4,7 @@ import pool from '../database';
 class StudentController{
 
     public async index(req:Request, res:Response ){
-        const students = await pool.query('SELECT U.*, S.* FROM students S, users U WHERE S.userId=U.userId');
+        const students = await pool.query('SELECT * FROM students');
         res.json(students);
     }
 
@@ -32,7 +32,7 @@ class StudentController{
     public async details(req:Request,res:Response):Promise<any>{
         //Destructurando una parte del objeto de Javascript
         const {id}=req.params;
-        const program= await pool.query('SELECT U.*, S.* FROM students S, users U WHERE SELECT U.*, S.* FROM students S, users U WHERE S.userId=U.userId AND studentId=?', [id]);
+        const program= await pool.query('SELECT * FROM students S WHERE studentId=?', [id]);
 
         if(program.length > 0){
             console.log(program[0]);
