@@ -1,0 +1,24 @@
+<div>
+    <a class="btn btn-success" routerLink="/coordinators/add" routerLinkActive="Active" style="color:white;"><i class="fa-solid fa-plus"></i> Añadir Coordinador</a>
+</div>
+<div class="col-md-4" *ngFor="let coordinator of coordinators">
+    <br>
+    <div class="card text-center">
+        <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center" >
+            Coordinator Id: {{coordinator.coordinator}}
+            <button class="btn btn-danger" (click)="deleteCoordinator(coordinator.coordinatorId)"><i class="fa-solid fa-minus"></i></button>
+        </div>
+        <img [src]="coordinator.photourl" class="card-img-top" width="720" height="420">
+        <div class="card-body">
+            <p>{{coordinator.firstName}} 
+                {{coordinator.fatherLastName}}
+                {{coordinator.motherLastName}}
+            </p>
+            <p>{{coordinator.rfc}} </p>
+            <p>{{coordinator.email}} </p>
+            <p>{{coordinator.phoneNumber}} </p>
+            <a [routerLink]="['/coordinator/edit',coordinator.coordinatorId,coordinator.userId]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+        </div>
+    </div>
+</div>
+

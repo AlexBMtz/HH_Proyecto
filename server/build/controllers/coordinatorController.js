@@ -17,7 +17,7 @@ const database_1 = __importDefault(require("../database"));
 class CoordinatorController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const coordinators = yield database_1.default.query('SELECT U.*, C.* FROM coordinators C, users U WHERE C.userId=U.userId');
+            const coordinators = yield database_1.default.query('SELECT * FROM coordinators');
             res.json(coordinators);
         });
     }
@@ -49,7 +49,7 @@ class CoordinatorController {
         return __awaiter(this, void 0, void 0, function* () {
             //Destructurando una parte del objeto de Javascript
             const { id } = req.params;
-            const coordinator = yield database_1.default.query('SELECT U.*, C.* FROM coordinators C, users U WHERE SELECT U.*, C.* FROM coordinators C, users U WHERE C.userId=U.userId AND coordinatorId=?', [id]);
+            const coordinator = yield database_1.default.query('SELECT * FROM coordinators C WHERE coordinatoId=?', [id]);
             if (coordinator.length > 0) {
                 console.log(coordinator[0]);
                 return res.json(coordinator[0]);

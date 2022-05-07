@@ -19,6 +19,8 @@ import { StudentsListComponent } from './components/students-list/students-list.
 import { StudentsFormComponent } from './components/students-form/students-form.component';
 import { UsersFormComponent } from './components/users-form/users-form.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
+import { CoordinatorsFormComponent } from './components/coordinators-form/coordinators-form.component';
+import { CoordinatorsListComponent } from './components/coordinators-list/coordinators-list.component';
 
 const routes: Routes = [
   {
@@ -183,6 +185,22 @@ const routes: Routes = [
   {
     path:'students/edit/:studentId',
     component:StudentsFormComponent
+  },
+
+  //Coordinators
+  {
+    path:'coordinators',
+    component:CoordinatorsListComponent
+  },
+
+  {
+    path:'coordinators/add',
+    component:CoordinatorsFormComponent
+  },
+
+  {
+    path:'coordinators/edit/:coordinatorId',
+    component:CoordinatorsFormComponent
   },
   //Sin coincidencias
   {

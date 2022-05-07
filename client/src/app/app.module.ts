@@ -25,6 +25,8 @@ import { CoursesListComponent } from './components/courses-list/courses-list.com
 import { CourseDetailsFormComponent } from './components/course-details-form/course-details-form.component';
 import { CourseDetailsListComponent } from './components/course-details-list/course-details-list.component';
 import { HomeComponent } from './components/home/home.component';
+import { CoordinatorsListComponent } from './components/coordinators-list/coordinators-list.component';
+import { CoordinatorsFormComponent } from './components/coordinators-form/coordinators-form.component';
 // import { CoursesFormComponent } from './components/courses-form/courses-form.component';
 // import { CourseListComponent } from './components/course-list/course-list.component';
 // import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
@@ -53,7 +55,9 @@ import { HomeComponent } from './components/home/home.component';
     CoursesListComponent,
     CourseDetailsFormComponent,
     CourseDetailsListComponent,
-    HomeComponent
+    HomeComponent,
+    CoordinatorsListComponent,
+    CoordinatorsFormComponent
   ],
   imports: [
     BrowserModule,

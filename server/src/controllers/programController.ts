@@ -13,7 +13,7 @@ class ProgramController{
         console.log(req.body);
         res.json({'message':"Nuevo Programa Registrado"});
     }
-
+    
     //Método para eliminar un registro
     public async delete(req:Request,res:Response):Promise<void>{
         const {id}=req.params;

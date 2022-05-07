@@ -4,7 +4,7 @@ import pool from '../database';
 class CoordinatorController{
 
     public async index(req:Request, res:Response ){
-        const coordinators = await pool.query('SELECT U.*, C.* FROM coordinators C, users U WHERE C.userId=U.userId');
+        const coordinators = await pool.query('SELECT * FROM coordinators');
         res.json(coordinators);
     }
     
@@ -32,7 +32,7 @@ class CoordinatorController{
     public async details(req:Request,res:Response):Promise<any>{
         //Destructurando una parte del objeto de Javascript
         const {id}=req.params;
-        const coordinator= await pool.query('SELECT U.*, C.* FROM coordinators C, users U WHERE SELECT U.*, C.* FROM coordinators C, users U WHERE C.userId=U.userId AND coordinatorId=?', [id]);
+        const coordinator= await pool.query('SELECT * FROM coordinators C WHERE coordinatoId=?', [id]);
 
         if(coordinator.length > 0){
             console.log(coordinator[0]);
