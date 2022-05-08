@@ -16,7 +16,7 @@ export class StudentsFormComponent implements OnInit {
 user:User=
 {
   email:'',
-  roleId:2,
+  roleId:1,
   password:'12345'
 
 }
@@ -59,8 +59,6 @@ edit:boolean = false;
 
    saveNewStudent()
   {
-  
-
     delete this.student.studentId;
     this.studentsService.saveStudent(this.student).subscribe(
       res => 
@@ -71,7 +69,7 @@ edit:boolean = false;
       err =>console.error(err)
       );
 
-      this.user.email=this.user.email;
+      this.user.email=this.student.email;
       this.usersService.saveUser(this.user).subscribe(res=>{
         console.log(this.student)
         console.log(res);

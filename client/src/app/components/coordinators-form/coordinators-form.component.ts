@@ -17,7 +17,7 @@ user:User=
 {
   email:'',
   roleId:3,
-  password:'123456'
+  password:'12345'
 }
 coordinator : Coordinator=
 {

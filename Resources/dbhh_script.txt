@@ -4,50 +4,54 @@ CREATE TABLE roles
   role varchar(30) NOT NULL
 );
 
+INSERT INTO `roles` (`roleId`, `role`) VALUES (1, 'Student'), (2, 'Teacher'), (3, 'Coordinator');
+
 CREATE TABLE users
 (
-    userId int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    email varchar(60) PRIMARY KEY NOT NULL,
+    password varchar(10) NOT NULL,
     roleId int NOT NULL,
+    
+    FOREIGN KEY (roleId) REFERENCES roles(roleId)
+);
+
+CREATE TABLE students 
+(
+    studentId int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+     firstName varchar(30) NOT NULL,
+    fatherLastName varchar(30) NOT NULL,
+    motherLastName varchar(30),
+    email varchar(60) NOT NULL,
+    phoneNumber varchar(10) NOT NULL,
+    admissionDate DATE NOT NULL,
+    photourl varchar(750) NOT NULL
+) AUTO_INCREMENT=6000;
+
+CREATE TABLE teachers 
+(
+    teacherId int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
     firstName varchar(30) NOT NULL,
     fatherLastName varchar(30) NOT NULL,
     motherLastName varchar(30),
     email varchar(60) NOT NULL,
     phoneNumber varchar(10) NOT NULL,
+    rfc varchar(13) NOT NULL,
+    hiringDate DATE NOT NULL,
+	photourl varchar(750) NOT NULL
+)AUTO_INCREMENT=8000;
 
-    FOREIGN KEY (roleId) REFERENCES roles (roleId)
-);
-
-CREATE TABLE coordinators
+CREATE TABLE coordinators 
 (
-    userId int NOT NULL,
-    coordinatorId int PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    coordinatorId int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+    firstName varchar(30) NOT NULL,
+    fatherLastName varchar(30) NOT NULL,
+    motherLastName varchar(30),
+    email varchar(60) NOT NULL,
+    phoneNumber varchar(10) NOT NULL,
     rfc varchar(13) NOT Null,
     hiringDate DATE NOT NULL,
-    INDEX fk_coordinatorUser(userId),
-    FOREIGN KEY (userId) REFERENCES users(userId)
-) AUTO_INCREMENT=10000;
-
-
-CREATE TABLE students
-(
-    userId int NOT NULL ,
-    studentId int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    admissionDate DATE NOT NULL,
-    INDEX fk_studentUser(userId),
-    FOREIGN KEY (userId) REFERENCES users(userId)
-
-) AUTO_INCREMENT=6000;
-
-CREATE TABLE teachers
-(
-    userId int NOT NULL ,
-    teacherId int PRIMARY KEY AUTO_INCREMENT NOT NULL,
-    rfc varchar(13) NOT NUll,
-    hiringDate DATE NOT NULL,
-    INDEX fk_teacherUser(userId),
-    FOREIGN KEY (userId) REFERENCES users(userId)
-
-) AUTO_INCREMENT=80000;
+    photourl varchar(750) NOT NULL
+)AUTO_INCREMENT=10000;
 
 CREATE TABLE frequencies
 (

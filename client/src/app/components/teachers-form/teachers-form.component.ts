@@ -16,9 +16,8 @@ export class TeachersFormComponent implements OnInit {
   user:User=
 {
   email:'',
-  roleId:1,
+  roleId:2,
   password:'12345'
-
 };
 
 teacher:Teacher=
