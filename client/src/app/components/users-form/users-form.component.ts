@@ -19,12 +19,17 @@ export class UsersFormComponent implements OnInit {
     roleId:0,
     password:''
   }
-  // student : Student =
-  // {
-  //   admissionDate: new Date(),
-  //   studentId:0,
-  //   userId:0
-  // }
+  student : Student =
+  {
+    admissionDate: new Date(),
+    studentId:0,
+    email: '',
+    fatherLastName : '',
+    firstName : '',
+    motherLastName:'',
+    phoneNumber: '',
+    photourl:''
+  }
   edit:boolean = false;
 
   constructor(private userService: UsersService, private router:Router, private studentService: StudentsService, private activatedRoute : ActivatedRoute) 
@@ -34,21 +39,21 @@ export class UsersFormComponent implements OnInit {
 
   ngOnInit(): void 
   {
-  //   const params = this.activatedRoute.snapshot.params;
-  //  // console.log(params)
-  //   if(params['studentId']) 
-  //   {
-  //     this.userService.getUser(params['userId']).subscribe
-  //     (
-  //       res => 
-  //       {
-  //         console.log(res); 
-  //         this.user=res;
-  //         this.edit=true;
-  //       },
-  //       err =>console.error(err)
-  //     );
-  //   }
+    const params = this.activatedRoute.snapshot.params;
+   // console.log(params)
+    if(params['studentId']) 
+    {
+      this.userService.getUser(params['userId']).subscribe
+      (
+        res => 
+        {
+          console.log(res); 
+          this.user=res;
+          this.edit=true;
+        },
+        err =>console.error(err)
+      );
+    }
   }
 
   saveNewUser()
@@ -65,14 +70,14 @@ export class UsersFormComponent implements OnInit {
 
   updateUser()
   {
-  //   this.userService.updateUser(this.user.UserId!,this.user).subscribe
-  //   (
-  //     res=>
-  //     {
-  //       console.log(res);
-  //       this.router.navigate
-  //     }
-  //   )
+    this.userService.updateUser(this.user.email!,this.user).subscribe
+    (
+      res=>
+      {
+        console.log(res);
+        this.router.navigate
+      }
+    )
   }
 
 }

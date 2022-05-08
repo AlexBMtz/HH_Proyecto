@@ -17,6 +17,7 @@ const studentrouters_1 = __importDefault(require("./routes/studentrouters"));
 const teacherRoutes_1 = __importDefault(require("./routes/teacherRoutes"));
 const courseroutes_1 = __importDefault(require("./routes/courseroutes"));
 const coursedetailsroutes_1 = __importDefault(require("./routes/coursedetailsroutes"));
+const loginroutes_1 = __importDefault(require("./routes/loginroutes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
@@ -47,6 +48,7 @@ class Server {
         this.app.use("/api/teachers", teacherRoutes_1.default);
         this.app.use("/api/courses", courseroutes_1.default);
         this.app.use("/api/courseDetails", coursedetailsroutes_1.default);
+        this.app.use("/api/login", loginroutes_1.default);
     }
 }
 const server = new Server();

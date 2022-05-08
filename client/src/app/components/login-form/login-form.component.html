@@ -1,0 +1,17 @@
+
+<div class="col-md-4 offset-md-4" >
+    <form>
+        <h1>Login</h1>
+
+      <!-- <input type="text"/> -->
+      <label for="Email">Email</label>
+      <input type="text" class="form-control" name = "email" [(ngModel)]="login.email" placeholder="@@@@"> 
+        <br>
+      <label for="Password">Contraseña</label>
+      <input type="text" class="form-control" name = "password" [(ngModel)]="login.password" > 
+
+        <br>
+      <button class="offset-md-5" type="submit" (click) = "Login()">  Log in   </button>  
+      <!--<button class="offset-md-5" type="submit" (click) = "Login(), Save()">  Log in   </button>  -->
+    </form>
+</div>

@@ -21,6 +21,7 @@ import { UsersFormComponent } from './components/users-form/users-form.component
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { CoordinatorsFormComponent } from './components/coordinators-form/coordinators-form.component';
 import { CoordinatorsListComponent } from './components/coordinators-list/coordinators-list.component';
+import { LoginFormComponent } from './components/login-form/login-form.component';
 
 const routes: Routes = [
   {
@@ -202,12 +203,21 @@ const routes: Routes = [
     path:'coordinators/edit/:coordinatorId',
     component:CoordinatorsFormComponent
   },
+  {
+    path: 'login',
+    component : LoginFormComponent
+  },
+  {
+    path: 'login/:email/:password',
+    component : LoginFormComponent
+  },
   //Sin coincidencias
   {
     path: '**',
     redirectTo: '',
     pathMatch: 'full'
   },
+  
  ];
 
 @NgModule({

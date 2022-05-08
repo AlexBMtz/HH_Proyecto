@@ -67,13 +67,13 @@ edit:boolean=false;
             },
             err => console.error(err)
     );
-
+    
     this.user.email=this.coordinator.email;
     this.usersService.saveUser(this.user).subscribe(
       res =>{
         console.log(this.coordinator)
         console.log(res);
-        this.router.navigate(['/teachers']);
+        this.router.navigate(['/coordinators']);
         },
         err => console.error(err)
     );

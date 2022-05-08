@@ -12,6 +12,7 @@ import studentRouters from './routes/studentrouters';
 import teacherRoutes from './routes/teacherRoutes';
 import courseRoutes from './routes/courseroutes';
 import courseDetailsRoutes from './routes/coursedetailsroutes';
+import loginroutes from './routes/loginroutes';
 
 class Server
 {
@@ -53,6 +54,7 @@ class Server
         this.app.use("/api/teachers",teacherRoutes);
         this.app.use("/api/courses",courseRoutes);
         this.app.use("/api/courseDetails",courseDetailsRoutes);
+        this.app.use("/api/login",loginroutes)
     }
 }
 
