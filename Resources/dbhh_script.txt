@@ -18,15 +18,13 @@ CREATE TABLE users
 CREATE TABLE students 
 (
     studentId int PRIMARY KEY NOT NULL AUTO_INCREMENT, 
-    firstName varchar(30) NOT NULL,
+     firstName varchar(30) NOT NULL,
     fatherLastName varchar(30) NOT NULL,
     motherLastName varchar(30),
     email varchar(60) NOT NULL,
     phoneNumber varchar(10) NOT NULL,
     admissionDate DATE NOT NULL,
-    photourl varchar(750) NOT NULL,
-
-	FOREIGN KEY (email) REFERENCES users(email)
+    photourl varchar(750) NOT NULL
 ) AUTO_INCREMENT=6000;
 
 CREATE TABLE teachers 
@@ -39,9 +37,7 @@ CREATE TABLE teachers
     phoneNumber varchar(10) NOT NULL,
     rfc varchar(13) NOT NULL,
     hiringDate DATE NOT NULL,
-	photourl varchar(750) NOT NULL,
-
-	FOREIGN KEY (email) REFERENCES users(email)
+	photourl varchar(750) NOT NULL
 )AUTO_INCREMENT=8000;
 
 CREATE TABLE coordinators 
@@ -54,9 +50,7 @@ CREATE TABLE coordinators
     phoneNumber varchar(10) NOT NULL,
     rfc varchar(13) NOT Null,
     hiringDate DATE NOT NULL,
-    photourl varchar(750) NOT NULL,
-
-	FOREIGN KEY (email) REFERENCES users(email)
+    photourl varchar(750) NOT NULL
 )AUTO_INCREMENT=10000;
 
 CREATE TABLE frequencies
