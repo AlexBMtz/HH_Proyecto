@@ -9,7 +9,8 @@ class UserController{
     }
 
     public async create(req:Request, res:Response):Promise<void>{
-        await pool.query('INSERT INTO users SET ?', [req.body]);
+        await pool.query('INSERT INTO users SET ?', 
+        [req.body]);
         console.log(req.body);
         res.json({'message':"Nuevo Usuario Registrado"});
     }

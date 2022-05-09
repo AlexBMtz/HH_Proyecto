@@ -35,6 +35,11 @@ teacher:Teacher=
 
 edit:boolean=false;
 
+users : any = [];
+register : any = [];
+email : any = null;
+exists : boolean = false;
+
   constructor(private teachersService:TeachersService, 
     private usersService:UsersService,
     private router:Router,
@@ -54,31 +59,69 @@ edit:boolean=false;
           this.teacher=res;
         },
         err => console.error(err)
-      )
+      );
     }
-    
+    this.filluser();
   }
 
   saveNewTeacher()
   {
-    delete this.teacher.teacherId;
-    this.teachersService.saveTeacher(this.teacher).subscribe(
-    res =>{
-            console.log(this.teacher)
-            console.log(res);
-            },
-            err => console.error(err)
-    );
+    // delete this.teacher.teacherId;
+    // this.teachersService.saveTeacher(this.teacher).subscribe(
+    // res =>{
+    //         console.log(this.teacher)
+    //         console.log(res);
+    //         },
+    //         err => console.error(err)
+    // );
 
-    this.user.email=this.teacher.email;
-    this.usersService.saveUser(this.user).subscribe(
-      res =>{
-        console.log(this.teacher)
-        console.log(res);
-        this.router.navigate(['/teachers']);
+    // this.user.email=this.teacher.email;
+    // this.usersService.saveUser(this.user).subscribe(
+    //   res =>{
+    //     console.log(this.teacher)
+    //     console.log(res);
+    //     this.router.navigate(['/teachers']);
+    //     },
+    //     err => console.error(err)
+    // );
+
+    console.log(this.teacher);
+    
+    for (let i = 0; i < this.register.length; i++) {
+      if (this.register[i].email == this.teacher.email) {
+        this.exists = true;
+        break;
+      }
+      else{
+        this.exists = false;
+      }
+    }
+
+    if(!this.exists){
+      this.teachersService.saveTeacher(this.teacher).subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/teachers', this.email]);
         },
         err => console.error(err)
-    );
+      );
+
+        this.user.email=this.teacher.email;
+        this.usersService.saveUser(this.user).subscribe(res=>{
+        console.log(this.teacher)
+        console.log(res);
+        this.router.navigate(['/teachers'])
+      },
+      err => console.error(err)
+      );
+          delete this.teacher.teacherId;
+           this.teacher.email = this.email;
+      
+    
+    }
+    else{
+      alert("No puedes registrar un nuevo usuario con ese correo.")
+    }
   }
   
 
@@ -93,6 +136,18 @@ edit:boolean=false;
       },
       err => console.error(err)
     );
+  }
+
+  filluser()
+  {
+    this.usersService.getUsers().
+    subscribe(
+      res => {
+        this.register = res;
+        console.log(res)
+      },
+      err => console.error(err)
+    )
   }
 
 }

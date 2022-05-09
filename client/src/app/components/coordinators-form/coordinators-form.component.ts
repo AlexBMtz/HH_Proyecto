@@ -33,6 +33,11 @@ coordinator : Coordinator=
 };
 edit:boolean=false;
 
+users : any = [];
+register : any = [];
+email : any = null;
+exists : boolean = false;
+
 
   constructor(private coordinatorsService:CoordinatorsService, private usersService:UsersService, private router:Router,private activatedRoute:ActivatedRoute) 
   {
@@ -42,6 +47,7 @@ edit:boolean=false;
   ngOnInit(): void 
   {
     const params=this.activatedRoute.snapshot.params;
+    console.log(params)
     if(params['coordinatorId'])
     {
       this.coordinatorsService.getCoordinator(params['coordinatorId']).subscribe
@@ -50,33 +56,72 @@ edit:boolean=false;
         {
           console.log(res)
           this.coordinator=res;
+          this.edit=true;
         },
         err => console.error(err)
-      )
+      );
     }
-    
+    this.filluser();
   }
 
   saveNewCoordinator()
   {
-    delete this.coordinator.coordinatorId;
-    this.coordinatorsService.saveCoordinator(this.coordinator).subscribe(
-    res =>{
-            console.log(this.coordinator)
-            console.log(res);
-            },
-            err => console.error(err)
-    );
+    // delete this.coordinator.coordinatorId;
+    // this.coordinatorsService.saveCoordinator(this.coordinator).subscribe(
+    // res =>{
+    //         console.log(this.coordinator)
+    //         console.log(res);
+    //         },
+    //         err => console.error(err)
+    // );
     
-    this.user.email=this.coordinator.email;
-    this.usersService.saveUser(this.user).subscribe(
-      res =>{
-        console.log(this.coordinator)
-        console.log(res);
-        this.router.navigate(['/coordinators']);
+    // this.user.email=this.coordinator.email;
+    // this.usersService.saveUser(this.user).subscribe(
+    //   res =>{
+    //     console.log(this.coordinator)
+    //     console.log(res);
+    //     this.router.navigate(['/coordinators']);
+    //     },
+    //     err => console.error(err)
+    // );
+
+    console.log(this.coordinator);
+    
+    for (let i = 0; i < this.register.length; i++) {
+      if (this.register[i].email == this.coordinator.email) {
+        this.exists = true;
+        break;
+      }
+      else{
+        this.exists = false;
+      }
+    }
+
+    if(!this.exists){
+      this.coordinatorsService.saveCoordinator(this.coordinator).subscribe(
+        res => {
+          console.log(res);
+          this.router.navigate(['/coordinators', this.email]);
         },
         err => console.error(err)
-    );
+      );
+
+        this.user.email=this.coordinator.email;
+        this.usersService.saveUser(this.user).subscribe(res=>{
+        console.log(this.coordinator)
+        console.log(res);
+        this.router.navigate(['/coordinators'])
+      },
+      err => console.error(err)
+      );
+          delete this.coordinator.coordinatorId;
+           this.coordinator.email = this.email;
+      
+    
+    }
+    else{
+      alert("No puedes registrar un nuevo usuario con ese correo.")
+    }
   }
   
 
@@ -91,6 +136,18 @@ edit:boolean=false;
       },
       err => console.error(err)
     );
+  }
+
+  filluser()
+  {
+    this.usersService.getUsers().
+    subscribe(
+      res => {
+        this.register = res;
+        console.log(res)
+      },
+      err => console.error(err)
+    )
   }
 
 }
