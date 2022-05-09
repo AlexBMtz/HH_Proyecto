@@ -17,7 +17,7 @@ const database_1 = __importDefault(require("../database"));
 class CourseController {
     index(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const courses = yield database_1.default.query('SELECT c.crn,c.courseName,c.startingDate,f.frequency,s.startingTime, s.endingTime, u.firstName, u.fatherLastName, u.motherLastName, pr.program, p.period FROM courses c, frequencies f, schedules s, teachers t, users u, programs pr, periods p WHERE c.frequencyId=f.frequencyId AND c.scheduleId=s.scheduleId AND c.teacherId=t.teacherId AND t.userId=u.userId AND c.programId=pr.programId AND c.periodId=p.periodId');
+            const courses = yield database_1.default.query('SELECT c.crn,c.courseName,c.startingDate,f.frequency,s.startingTime, s.endingTime, t.firstName, t.fatherLastName, t.motherLastName, pr.program, p.period FROM courses c, frequencies f, schedules s, teachers t, programs pr, periods p WHERE c.frequencyId=f.frequencyId AND c.scheduleId=s.scheduleId AND c.teacherId=t.teacherId AND c.programId=pr.programId AND c.periodId=p.periodId');
             res.json(courses);
         });
     }

@@ -37,11 +37,4 @@ export class UsersService {
    {
      return this.http.put('http://localhost:5000/api/users/'+UserId,user);
    }
-   
-   login(email:string, UserId: number ) //, UserId: string
-   {
-    return this.http.get("http://localhost:5000/api/login/"+email+'/'+UserId); //'+/'+UserId
-   }
-
-
 }

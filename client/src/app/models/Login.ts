@@ -2,6 +2,6 @@ export interface Login
 {
    // firstName ?: string,
     email ? : string,
-    password ?: number
-
+    password ?: string,
+    roleId ? : number
 }

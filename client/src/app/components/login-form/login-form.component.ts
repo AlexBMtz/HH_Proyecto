@@ -1,7 +1,7 @@
 import { Component, OnInit,HostBinding } from '@angular/core';
 import { Login } from 'src/app/models/Login';
 import { ActivatedRoute, Router } from '@angular/router';
-import { UsersService } from 'src/app/services/users.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login-form',
@@ -9,14 +9,18 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
-@HostBinding('class') classes = 'row';
-login : Login =
-{
-  email : '',
-  password : 0
-}
-edit:boolean = false;
-  constructor(private router: Router,private activatedRoute : ActivatedRoute, private usersService : UsersService) 
+  @HostBinding('class') classes = 'row';
+  login : Login =
+  {
+    email : '',
+    password : '',
+    roleId : 0
+  }
+  users : any = [];
+  user : any;
+  exists : boolean = false;
+
+  constructor(private router: Router,private activatedRoute : ActivatedRoute, private loginService : LoginService) 
   {
 
   }
@@ -27,30 +31,44 @@ edit:boolean = false;
 
   Login()
   {
-    const user = this.usersService.login(this.login.email!,this.login.password!).subscribe
-    (
-    res => 
-    {
-      console.log(JSON.stringify(res));
-      //console.log(res)
-      
-      //.substring(1,10) 
-      //Cambiar por params = this.activatedroute.snapshot.params gracias Edwin
-      if(JSON.stringify(res)[9] == "1")  //
-      {
-        
-              this.router.navigate(['/'])
-        
-      }
-      else
-      {
-        alert("Usuario y/o contraseña incorrecta")
-        this.router.navigate(['/login'])
-      }
-    },
-    err =>console.error(err)
-    );
-    console.log(user)
+    this.login.email = this.login.email!.trim();
+
+    this.loginService.login(this.login.email!).subscribe(
+      res => {
+        console.log(res);
+        this.users = res;
+        for (let i = 0; i < this.users.length; i++) {
+          if (this.users[i].email == this.login.email) {
+            this.exists = true;
+            this.user = this.users[i];
+            break;
+          }
+          else{
+            this.exists = false;
+          }
+        }
+
+        console.log(this.user);
+
+        if(this.exists){
+          if (this.user.password == this.login.password){
+
+            console.log(this.user.roleId)
+            this.loginService.setCookie(this.user.roleId);
+
+            this.router.navigate(['/'])
+            //alert("Login correcto!");
+          }
+          else{
+            alert("Usuario o contraseña incorrecta.");
+          }
+        }
+        else{
+          alert("El Usuario no existe.");
+        }
+      },
+      err =>console.error(err)
+      );
   }
 
 }

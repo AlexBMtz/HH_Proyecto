@@ -13,8 +13,7 @@ class LoginRoutes
 
     config():void
     {
-      //  this.router.get('/:email',loginController.getUserDetail);
-      this.router.get('/:email/:password',loginController.getUserDetail);
+      this.router.get('/:email',loginController.getUserDetail);
     }
 }
 const loginRoutes = new LoginRoutes();

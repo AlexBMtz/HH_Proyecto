@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
@@ -29,11 +30,6 @@ import { CoordinatorsListComponent } from './components/coordinators-list/coordi
 import { CoordinatorsFormComponent } from './components/coordinators-form/coordinators-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginListComponent } from './components/login-list/login-list.component';
-// import { CoursesFormComponent } from './components/courses-form/courses-form.component';
-// import { CourseListComponent } from './components/course-list/course-list.component';
-// import { StudentsCoursesFormComponent } from './components/students-courses-form/students-courses-form.component';
-// import { StudentListComponent } from './components/student-list/student-list.component';
-// import { StudentsFormComponent } from './components/students-form/students-form.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +65,9 @@ import { LoginListComponent } from './components/login-list/login-list.component
     FormsModule,
     HttpClientModule
   ],
-  providers: [FrequenciesService],
+  providers: [
+    FrequenciesService, 
+    CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

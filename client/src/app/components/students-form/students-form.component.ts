@@ -145,8 +145,7 @@ exists : boolean = false;
 
   filluser()
   {
-    this.usersService.getUsers().
-    subscribe(
+    this.usersService.getUsers().subscribe(
       res => {
         this.register = res;
         console.log(res)
