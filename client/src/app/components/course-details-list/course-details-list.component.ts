@@ -1,6 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CourseDetailsService } from 'src/app/services/course-details.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-course-details-list',
@@ -11,11 +12,20 @@ export class CourseDetailsListComponent implements OnInit {
   @HostBinding('class') classes = 'row';
   courseDetails : any = [];
   id : any;
-  constructor(private courseDetailService : CourseDetailsService, private route : ActivatedRoute, private router : Router) { }
+  constructor(private courseDetailService : CourseDetailsService, private route : ActivatedRoute, 
+    private router : Router, private loginService : LoginService) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.paramMap.get('id')
-    this.getListCourseDetails(this.id);
+    var role = this.loginService.getCookie()
+    if(role == '3' || role == '2'){
+      this.id = this.route.snapshot.paramMap.get('id')
+      this.getListCourseDetails(this.id);
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
+    
   }
   
   getListCourseDetails(studentId : string) : void {

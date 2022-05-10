@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {Period} from 'src/app/models/Period';
+import { LoginService } from 'src/app/services/login.service';
 import { PeriodsService } from 'src/app/services/periods.service';
 
 @Component({
@@ -19,25 +20,34 @@ export class PeriodsFormComponent implements OnInit {
   rows:any=[];
 
   constructor(private router:Router,
-    private activatedRoute:ActivatedRoute, private periodService:PeriodsService) { }
+    private activatedRoute:ActivatedRoute, 
+    private periodService:PeriodsService,
+    private loginService : LoginService) { }
 
     ngOnInit(): void {
-      const params=this.activatedRoute.snapshot.params;
-      //console.log(params);
-      if(params['periodId'])
-      {
-        this.periodService.getPeriod(params['periodId']).subscribe
-        (
-          res => 
-          {
-            console.log(res)
-            this.period=res;
-            this.edit=true;
-          },
-          err => console.error(err)
-        )
+      var role = this.loginService.getCookie()
+      if(role == '3'){
+        const params=this.activatedRoute.snapshot.params;
+        //console.log(params);
+        if(params['periodId'])
+        {
+          this.periodService.getPeriod(params['periodId']).subscribe
+          (
+            res => 
+            {
+              console.log(res)
+              this.period=res;
+              this.edit=true;
+            },
+            err => console.error(err)
+          )
+        }
+        this.periodService.getPeriods().subscribe(p=>{this.rows=p})
       }
-      this.periodService.getPeriods().subscribe(p=>{this.rows=p})
+      else{
+        alert("No tienes permisos para acceder a este apartado.")
+        this.router.navigate(['/'])
+      }
     }
   
     validatePeriod(){

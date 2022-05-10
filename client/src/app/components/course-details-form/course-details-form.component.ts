@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CourseDetailsService } from 'src/app/services/course-details.service';
 import { StudentsService } from 'src/app/services/students.service';
 import { CourseDetail } from 'src/app/models/CourseDetail';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-course-details-form',
@@ -35,31 +36,39 @@ export class CourseDetailsFormComponent implements OnInit {
   crn : any = null;
   detailId : any = null;
 
-  constructor(private courseDetailService : CourseDetailsService, private studentService : StudentsService, private router : Router, private route : ActivatedRoute) {
+  constructor(private courseDetailService : CourseDetailsService, private studentService : StudentsService, 
+    private router : Router, private route : ActivatedRoute, private loginService : LoginService) {
      }
 
   ngOnInit(): void {
-    const params = this.route.snapshot.params
-    console.log(params)
+    var role = this.loginService.getCookie()
+    if(role == '3' || role == '2'){
+      const params = this.route.snapshot.params
+      console.log(params)
 
-    this.crn = params['crn'];
-    this.detailId = params['studentId'];
-    console.log(this.crn);
-    console.log(this.detailId);
+      this.crn = params['crn'];
+      this.detailId = params['studentId'];
+      console.log(this.crn);
+      console.log(this.detailId);
 
-    if(this.detailId != undefined){
-      this.courseDetailService.getCourseDetail(this.detailId).subscribe(
-        res => {
-          console.log(res);
-          this.courseDetail = res;
-          this.edit = true;
-        },
-        err => console.log(err)
-      );
+      if(this.detailId != undefined){
+        this.courseDetailService.getCourseDetail(this.detailId).subscribe(
+          res => {
+            console.log(res);
+            this.courseDetail = res;
+            this.edit = true;
+          },
+          err => console.log(err)
+        );
+      }
+
+      this.fillStudents()
+      this.fillCourse_Details()
     }
-
-    this.fillStudents()
-    this.fillCourse_Details()
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
   }
 
   saveNewCourseDetail() {

@@ -25,11 +25,11 @@
                 </div>
                 <div class="form-group">
                     <label>Fecha de Admisión</label>
-                    <input placeholder="Hiring Date" [(ngModel)]="student.admissionDate" type="date" name="admissionDate" class="form-control"/>
+                    <input placeholder="Hiring Date" [(ngModel)]="edit ? dateString: student.admissionDate" type="date" name="admissionDate" class="form-control"/>
                 </div>
                 <div class="form-group">
                     <label>Foto</label>
-                    <input placeholder="Photo" type="url" name="photourl" [(ngModel)]="student.photourl" class="form-control"/>
+                    <input placeholder="Photo" type="url" name="photourl" [(ngModel)]="student.photourl == '/assets/NoImage.jpg' ? '' : student.photourl" class="form-control"/>
                 </div>
                 <br>
                 <button class="btn btn-success" (click)="edit ? updateStudent(): saveNewStudent()" >Guardar</button>

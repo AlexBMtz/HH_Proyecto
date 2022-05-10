@@ -1,10 +1,11 @@
-import { Component, OnInit,HostBinding } from '@angular/core';
+import { Component, OnInit, Inject, LOCALE_ID, HostBinding } from '@angular/core';
 import { StudentsService } from 'src/app/services/students.service';
 import { Student } from 'src/app/models/Student';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ThisReceiver } from '@angular/compiler';
+import { formatDate } from '@angular/common';
 import { User } from 'src/app/models/User';
 import { UsersService } from 'src/app/services/users.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-students-form',
@@ -38,93 +39,93 @@ users : any = [];
 register : any = [];
 email : any = null;
 exists : boolean = false;
+dateString : any;
 
-  constructor(private studentsService : StudentsService,private usersService:UsersService, private router:Router, private activatedRoute: ActivatedRoute) 
+  constructor(private studentsService : StudentsService,private usersService:UsersService, 
+    private router:Router, private activatedRoute: ActivatedRoute, private loginService : LoginService,
+    @Inject(LOCALE_ID) private locale:string) 
   {
 
   }
 
   ngOnInit(): void 
   {
-    const params = this.activatedRoute.snapshot.params;
-     console.log(params)
-     if(params['studentId']) 
-     {
-       this.studentsService.getStudent(params['studentId']).subscribe
-       (
-         res => 
-         {
-           console.log(res); 
-           this.student=res;
-           this.edit=true;
-         },
-         err =>console.error(err)
-       );
-     }
+    var role = this.loginService.getCookie()
+    if(role == '3' || role == '2'){
+      const params = this.activatedRoute.snapshot.params;
+      console.log(params)
+      if(params['studentId']) 
+      {
+        this.studentsService.getStudent(params['studentId']).subscribe
+        (
+          res => 
+          {
+            console.log(res); 
+            this.student=res;
+            this.edit=true;
 
-     this.filluser();
+            this.dateString = formatDate(this.student.admissionDate!, 'yyyy-MM-dd', this.locale)
+            console.log(this.dateString)
+          },
+          err =>console.error(err)
+        );
+      }
+
+      this.filluser();
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
+    
    }
 
    saveNewStudent()
   {
-    // delete this.student.studentId;
-    // this.studentsService.saveStudent(this.student).subscribe(
-    //   res => 
-    //   {
-    //     console.log(this.student); 
-    //     console.log(res);
-    //   },
-    //   err =>console.error(err)
-    //   );
-
-    //   this.user.email=this.student.email;
-    //   this.usersService.saveUser(this.user).subscribe(res=>{
-    //     console.log(this.student)
-    //     console.log(res);
-    //     this.router.navigate(['/students'])
-    //   },
-    //   err => console.error(err)
-    //   );
+    if(this.student.email != '' && this.student.fatherLastName != '' && this.student.firstName != '' && 
+      this.student.motherLastName != '' && this.student.phoneNumber != ''){
+      console.log(this.student);
     
-    // delete this.student.studentId;
-    // this.student.email = this.email;
-
-    console.log(this.student);
-    
-    for (let i = 0; i < this.register.length; i++) {
-      if (this.register[i].email == this.student.email) {
-        this.exists = true;
-        break;
+      for (let i = 0; i < this.register.length; i++) {
+        if (this.register[i].email == this.student.email) {
+          this.exists = true;
+          break;
+        }
+        else{
+          this.exists = false;
+        }
       }
-      else{
-        this.exists = false;
-      }
-    }
 
-    if(!this.exists){
-      this.studentsService.saveStudent(this.student).subscribe(
-        res => {
+      if(!this.exists){
+        delete this.student.studentId;
+
+        if(this.student.photourl == ''){
+          this.student.photourl = '/assets/NoImage.jpg'
+        }
+
+        this.studentsService.saveStudent(this.student).subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/students']);
+          },
+          err => console.error(err)
+        );
+
+          this.user.email=this.student.email;
+          this.usersService.saveUser(this.user).subscribe(res=>{
+          console.log(this.student)
           console.log(res);
-          this.router.navigate(['/students', this.email]);
+          this.router.navigate(['/students'])
         },
         err => console.error(err)
-      );
-
-        this.user.email=this.student.email;
-        this.usersService.saveUser(this.user).subscribe(res=>{
-        console.log(this.student)
-        console.log(res);
-        this.router.navigate(['/students'])
-      },
-      err => console.error(err)
-      );
-          delete this.student.studentId;
-           this.student.email = this.email;
-      
-    
+        );
+      }
+      else{
+        alert("No puedes registrar un nuevo usuario con ese correo.")
+      }
     }
     else{
-      alert("No puedes registrar un nuevo usuario con ese correo.")
+      alert("Por favor completa todos los registros.")
     }
   } 
 

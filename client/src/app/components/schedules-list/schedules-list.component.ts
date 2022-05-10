@@ -1,4 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { SchedulesService } from 'src/app/services/schedules.service';
 
 @Component({
@@ -9,10 +11,18 @@ import { SchedulesService } from 'src/app/services/schedules.service';
 export class SchedulesListComponent implements OnInit {
   @HostBinding('class') classes='row';
   schedules:any=[];
-  constructor(private schedulesService:SchedulesService) { }
+  constructor(private schedulesService:SchedulesService, private router : Router,
+    private loginService : LoginService) { }
 
   ngOnInit(): void {
-    this.listSchedules();
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      this.listSchedules();
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
   }
 
   listSchedules(){

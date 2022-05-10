@@ -1,6 +1,8 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { CoordinatorsService } from 'src/app/services/coordinators.service';
-import { Coordinator } from 'src/app/models/Coordinator';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-coordinators-list',
@@ -9,16 +11,56 @@ import { Coordinator } from 'src/app/models/Coordinator';
 })
 export class CoordinatorsListComponent implements OnInit {
   @HostBinding('class') classes = 'row';
+
   roles : any= [];
   coordinators:any=[];
-  constructor(private coordiantorService: CoordinatorsService) 
+  coordinator : any;
+  users : any = [];
+
+  constructor(private coordiantorService: CoordinatorsService, private router : Router,
+    private loginService : LoginService, private userService : UsersService) 
   {
 
   }
 
   ngOnInit(): void
   {
-    this.listCoordinators();
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      this.listCoordinators();
+      this.filluser;
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
+  }
+
+  deleteCoordinator(coordinatorId:string)
+  {
+    this.coordiantorService.getCoordinator(coordinatorId).subscribe(
+      res => {
+        this.coordinator = res
+      }, err => console.error(err)
+    );
+
+    this.userService.deleteUser(this.coordinator.email).subscribe(
+      res =>
+      {
+        console.log(res);
+        this.filluser();
+      },
+      err => console.error(err)
+    )
+
+    this.coordiantorService.deleteCoordinator(coordinatorId).subscribe(
+      res=>
+      {
+        console.log(res);
+        this.listCoordinators();
+      },
+      err => console.error(err)
+    )
   }
 
   listCoordinators()
@@ -29,13 +71,13 @@ export class CoordinatorsListComponent implements OnInit {
     );
   }
 
-  deleteCoordinator(coordinatorId:string)
+  filluser()
   {
-    this.coordiantorService.deleteCoordinator(coordinatorId).subscribe(
-      res=>
-      {
-        console.log(res);
-        this.listCoordinators();
+    this.userService.getUsers().
+    subscribe(
+      res => {
+        this.users = res;
+        console.log(res)
       },
       err => console.error(err)
     )

@@ -22,6 +22,7 @@ import { UsersListComponent } from './components/users-list/users-list.component
 import { CoordinatorsFormComponent } from './components/coordinators-form/coordinators-form.component';
 import { CoordinatorsListComponent } from './components/coordinators-list/coordinators-list.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 const routes: Routes = [
   {
@@ -208,8 +209,12 @@ const routes: Routes = [
     component : LoginFormComponent
   },
   {
-    path: 'login/:email/:password',
+    path: 'login/:email',
     component : LoginFormComponent
+  },
+  {
+    path: 'logout',
+    component : LogoutComponent
   },
   //Sin coincidencias
   {

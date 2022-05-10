@@ -32,7 +32,7 @@ class UserController {
     delete(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('DELETE FROM users WHERE userId=?', [id]);
+            yield database_1.default.query('DELETE FROM users WHERE email=?', [id]);
             res.json({ 'message': 'Eliminando usuario ' + id });
         });
     }
@@ -40,7 +40,7 @@ class UserController {
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            yield database_1.default.query('UPDATE users SET ? WHERE userId=?', [req.body, id]);
+            yield database_1.default.query('UPDATE users SET ? WHERE email=?', [req.body, id]);
             console.log(req.body);
             res.json({ 'message': 'Usuario ' + id + ' Modificado' });
         });
@@ -49,7 +49,7 @@ class UserController {
         return __awaiter(this, void 0, void 0, function* () {
             //Destructurando una parte del objeto de Javascript
             const { id } = req.params;
-            const program = yield database_1.default.query('SELECT * FROM users WHERE userId=?', [id]);
+            const program = yield database_1.default.query('SELECT * FROM users WHERE email=?', [id]);
             if (program.length > 0) {
                 console.log(program[0]);
                 return res.json(program[0]);

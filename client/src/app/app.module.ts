@@ -29,7 +29,7 @@ import { HomeComponent } from './components/home/home.component';
 import { CoordinatorsListComponent } from './components/coordinators-list/coordinators-list.component';
 import { CoordinatorsFormComponent } from './components/coordinators-form/coordinators-form.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { LoginListComponent } from './components/login-list/login-list.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +57,7 @@ import { LoginListComponent } from './components/login-list/login-list.component
     CoordinatorsListComponent,
     CoordinatorsFormComponent,
     LoginFormComponent,
-    LoginListComponent
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

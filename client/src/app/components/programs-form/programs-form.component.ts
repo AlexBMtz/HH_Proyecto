@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import {Program} from 'src/app/models/Program';
+import { LoginService } from 'src/app/services/login.service';
 import { ProgramsService } from 'src/app/services/programs.service';
 
 @Component({
@@ -19,10 +20,14 @@ export class ProgramsFormComponent implements OnInit {
   rows:any=[];
 
   constructor(private router:Router,
-    private activatedRoute:ActivatedRoute, private programService:ProgramsService) { }
+    private activatedRoute:ActivatedRoute, 
+    private programService:ProgramsService,
+    private loginService : LoginService) { }
 
   ngOnInit(): void {
-    const params=this.activatedRoute.snapshot.params;
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      const params=this.activatedRoute.snapshot.params;
       //console.log(params);
       if(params['programId'])
       {
@@ -38,6 +43,12 @@ export class ProgramsFormComponent implements OnInit {
         )
       }
       this.programService.getPrograms().subscribe(p=>{this.rows=p})
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
+    
     }
 
 

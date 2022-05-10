@@ -1,9 +1,11 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { Teacher } from 'src/app/models/Teacher';
 import { User } from 'src/app/models/User';
 import { TeachersService } from 'src/app/services/teachers.service';
 import { Router, ActivatedRoute} from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
+import { LoginService } from 'src/app/services/login.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-teacher-form',
@@ -37,90 +39,92 @@ edit:boolean=false;
 
 users : any = [];
 register : any = [];
-email : any = null;
 exists : boolean = false;
+dateString : any;
 
   constructor(private teachersService:TeachersService, 
     private usersService:UsersService,
     private router:Router,
-    private activatedRoute:ActivatedRoute)
+    private activatedRoute:ActivatedRoute,
+    private loginService : LoginService,
+    @Inject(LOCALE_ID) private locale:string)
     { 
     }
 
   ngOnInit(): void {
-    const params=this.activatedRoute.snapshot.params;
-    if(params['teacherId'])
-    {
-      this.teachersService.getTeacher(params['teacherId']).subscribe
-      (
-        res => 
-        {
-          console.log(res)
-          this.teacher=res;
-        },
-        err => console.error(err)
-      );
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      const params=this.activatedRoute.snapshot.params;
+      if(params['teacherId'])
+      {
+        this.teachersService.getTeacher(params['teacherId']).subscribe
+        (
+          res => 
+          {
+            console.log(res)
+            this.teacher=res;
+            this.edit = true;
+
+            this.dateString = formatDate(this.teacher.hiringDate!, 'yyyy-MM-dd', this.locale)
+            console.log(this.dateString)
+          },
+          err => console.error(err)
+        );
+      }
+      this.filluser();
     }
-    this.filluser();
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
+    
   }
 
   saveNewTeacher()
   {
-    // delete this.teacher.teacherId;
-    // this.teachersService.saveTeacher(this.teacher).subscribe(
-    // res =>{
-    //         console.log(this.teacher)
-    //         console.log(res);
-    //         },
-    //         err => console.error(err)
-    // );
-
-    // this.user.email=this.teacher.email;
-    // this.usersService.saveUser(this.user).subscribe(
-    //   res =>{
-    //     console.log(this.teacher)
-    //     console.log(res);
-    //     this.router.navigate(['/teachers']);
-    //     },
-    //     err => console.error(err)
-    // );
-
-    console.log(this.teacher);
-    
-    for (let i = 0; i < this.register.length; i++) {
-      if (this.register[i].email == this.teacher.email) {
-        this.exists = true;
-        break;
+    if(this.teacher.email != '' && this.teacher.fatherLastName != '' && this.teacher.firstName != '' && 
+    this.teacher.motherLastName != '' && this.teacher.phoneNumber != '' && this.teacher.rfc != ''){
+      console.log(this.teacher);
+      for (let i = 0; i < this.register.length; i++) {
+        if (this.register[i].email == this.teacher.email) {
+          this.exists = true;
+          break;
+        }
+        else{
+          this.exists = false;
+        }
       }
-      else{
-        this.exists = false;
-      }
-    }
 
-    if(!this.exists){
-      this.teachersService.saveTeacher(this.teacher).subscribe(
-        res => {
+      if(!this.exists){
+        delete this.teacher.teacherId;
+
+        if(this.teacher.photourl == ''){
+          this.teacher.photourl = '/assets/NoImage.jpg'
+        }
+
+        this.teachersService.saveTeacher(this.teacher).subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/teachers']);
+          },
+          err => console.error(err)
+        );
+
+          this.user.email=this.teacher.email;
+          this.usersService.saveUser(this.user).subscribe(res=>{
+          console.log(this.teacher)
           console.log(res);
-          this.router.navigate(['/teachers', this.email]);
+          this.router.navigate(['/teachers'])
         },
         err => console.error(err)
-      );
-
-        this.user.email=this.teacher.email;
-        this.usersService.saveUser(this.user).subscribe(res=>{
-        console.log(this.teacher)
-        console.log(res);
-        this.router.navigate(['/teachers'])
-      },
-      err => console.error(err)
-      );
-          delete this.teacher.teacherId;
-           this.teacher.email = this.email;
-      
-    
+        );
+      }
+      else{
+        alert("No puedes registrar un nuevo usuario con ese correo.")
+      }
     }
     else{
-      alert("No puedes registrar un nuevo usuario con ese correo.")
+      alert("Por favor completa todos los registros.")
     }
   }
   

@@ -32,7 +32,7 @@ class CoordinatorController{
     public async details(req:Request,res:Response):Promise<any>{
         //Destructurando una parte del objeto de Javascript
         const {id}=req.params;
-        const coordinator= await pool.query('SELECT * FROM coordinators C WHERE coordinatoId=?', [id]);
+        const coordinator= await pool.query('SELECT * FROM coordinators C WHERE coordinatorId=?', [id]);
 
         if(coordinator.length > 0){
             console.log(coordinator[0]);

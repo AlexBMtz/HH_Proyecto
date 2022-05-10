@@ -2,6 +2,7 @@ import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Frequency } from 'src/app/models/Frequency';
 import { FrequenciesService } from 'src/app/services/frequencies.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-frequencies-form',
@@ -21,25 +22,34 @@ export class FrequenciesFormComponent implements OnInit {
 
   constructor(private frequenciesService:FrequenciesService, 
     private router:Router,
-    private activatedRoute:ActivatedRoute) { }
+    private activatedRoute:ActivatedRoute,
+    private loginService : LoginService) { }
 
   ngOnInit(): void {
-    const params=this.activatedRoute.snapshot.params;
-    //console.log(params);
-    if(params['frequencyId'])
-    {
-      this.frequenciesService.getFrequency(params['frequencyId']).subscribe
-      (
-        res => 
-        {
-          console.log(res)
-          this.frequency=res;
-          this.edit=true;
-        },
-        err => console.error(err)
-      )
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      const params=this.activatedRoute.snapshot.params;
+      //console.log(params);
+      if(params['frequencyId'])
+      {
+        this.frequenciesService.getFrequency(params['frequencyId']).subscribe
+        (
+          res => 
+          {
+            console.log(res)
+            this.frequency=res;
+            this.edit=true;
+          },
+          err => console.error(err)
+        )
+      }
+      this.frequenciesService.getFrequencies().subscribe(f=>{this.rows=f})
     }
-    this.frequenciesService.getFrequencies().subscribe(f=>{this.rows=f})
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
+    
   }
 
   validateFrequency(){

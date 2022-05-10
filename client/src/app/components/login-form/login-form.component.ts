@@ -1,6 +1,6 @@
 import { Component, OnInit,HostBinding } from '@angular/core';
 import { Login } from 'src/app/models/Login';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginFormComponent implements OnInit {
   user : any;
   exists : boolean = false;
 
-  constructor(private router: Router,private activatedRoute : ActivatedRoute, private loginService : LoginService) 
+  constructor(private router: Router, private loginService : LoginService) 
   {
 
   }

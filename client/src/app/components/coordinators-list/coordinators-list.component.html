@@ -17,7 +17,7 @@
             <p>{{coordinator.rfc}} </p>
             <p>{{coordinator.email}} </p>
             <p>{{coordinator.phoneNumber}} </p>
-            <a [routerLink]="['/coordinator/edit',coordinator.coordinatorId,coordinator.userId]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+            <a [routerLink]="['edit/',coordinator.coordinatorId]" class="btn btn-info"><i class="fa-solid fa-pencil"></i></a>
         </div>
     </div>
 </div>

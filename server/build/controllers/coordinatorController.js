@@ -49,7 +49,7 @@ class CoordinatorController {
         return __awaiter(this, void 0, void 0, function* () {
             //Destructurando una parte del objeto de Javascript
             const { id } = req.params;
-            const coordinator = yield database_1.default.query('SELECT * FROM coordinators C WHERE coordinatoId=?', [id]);
+            const coordinator = yield database_1.default.query('SELECT * FROM coordinators C WHERE coordinatorId=?', [id]);
             if (coordinator.length > 0) {
                 console.log(coordinator[0]);
                 return res.json(coordinator[0]);

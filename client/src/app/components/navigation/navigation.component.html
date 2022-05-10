@@ -6,6 +6,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
       <div *ngIf="roleId == 3">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto"> <!--ms-auto alinear todo-->
@@ -31,13 +32,13 @@
               <a class="nav-link active" aria-current="page" routerLink="/teachers" routerLinkActive="Active"><i class="fa-solid fa-chalkboard-user"></i> Teachers</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/students" routerLinkActive="Active"><i class="fa-solid fa-chalkboard-user"></i> Students</a>
+              <a class="nav-link active" aria-current="page" routerLink="/students" routerLinkActive="Active"><i class="fa-solid fa-graduation-cap"></i> Students</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/coordinators" routerLinkActive="Active"><i class="fa-solid fa-chalkboard-user"></i> Coordinators</a>
+              <a class="nav-link active" aria-current="page" routerLink="/coordinators" routerLinkActive="Active"><i class="fa-solid fa-user-tie"></i> Coordinators</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/login" routerLinkActive="Active"><i class="fa-solid fa-l"></i> Login</a>
+              <a class="nav-link active" aria-current="page" routerLink="/logout" routerLinkActive="Active"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
             </li>
           </ul>
         </div>
@@ -50,9 +51,10 @@
               <a class="nav-link active" aria-current="page" routerLink="/courses" routerLinkActive="Active"><i class="fa-solid fa-people-group"></i> Courses</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/students" routerLinkActive="Active"><i class="fa-solid fa-chalkboard-user"></i> Students</a>
+              <a class="nav-link active" aria-current="page" routerLink="/students" routerLinkActive="Active"><i class="fa-solid fa-graduation-cap"></i> Students</a>
+            </li>
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/login" routerLinkActive="Active"><i class="fa-solid fa-l"></i> Login</a>
+              <a class="nav-link active" aria-current="page" routerLink="/logout" routerLinkActive="Active"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </li>
           </ul>
         </div>
@@ -62,21 +64,21 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto"> <!--ms-auto alinear todo-->
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" routerLink="/login" routerLinkActive="Active"><i class="fa-solid fa-l"></i> Login</a>
+              <a class="nav-link active" aria-current="page" routerLink="/logout" routerLinkActive="Active"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
             </li>
           </ul>
         </div>
       </div>
 
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" role="button" href="#" id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown link
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+      <div *ngIf="roleId == 0">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto"> <!--ms-auto alinear todo-->
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" routerLink="/login" routerLinkActive="Active"><i class="fa-solid fa-right-to-bracket"></i> Login</a>
+            </li>
+          </ul>
         </div>
-      </li> -->
+      </div>
+
     </div>
   </nav>

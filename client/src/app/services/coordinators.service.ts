@@ -17,7 +17,7 @@ export class CoordinatorsService {
 
   getCoordinator(coordinatoId:string)
   {
-    return this.Http.get('http://localhost:5000/api/coordiantors/'+coordinatoId);
+    return this.Http.get('http://localhost:5000/api/coordinators/'+coordinatoId);
   }
 
   saveCoordinator(coordinator : Coordinator)

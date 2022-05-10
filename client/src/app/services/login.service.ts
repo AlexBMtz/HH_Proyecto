@@ -14,6 +14,13 @@ export class LoginService {
     return this.http.get("http://localhost:5000/api/login/"+email);
   }
 
+  logout(){
+    this.setCookie('0');
+
+      var Cookie = this.getCookie();
+      console.log(Cookie);
+  }
+
   setCookie(Id: string) {
     this.cookies.set("roleId", Id);
   }

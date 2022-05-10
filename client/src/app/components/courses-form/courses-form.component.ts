@@ -8,6 +8,7 @@ import { TeachersService } from 'src/app/services/teachers.service';
 import { ProgramsService } from 'src/app/services/programs.service';
 import { PeriodsService } from 'src/app/services/periods.service';
 import { formatDate } from '@angular/common';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-courses-form',
@@ -47,35 +48,42 @@ export class CoursesFormComponent implements OnInit
     private teachersService:TeachersService,
     private programsService:ProgramsService,
     private periodsService:PeriodsService,
+    private loginService : LoginService,
     @Inject(LOCALE_ID) private locale:string) { }
 
   ngOnInit(): void {
+    var role = this.loginService.getCookie()
+    if(role == '3' || role == '2'){
+      this.schedules=this.schedulesService.getSchedules().subscribe(s=>{this.schedules=s});
+      this.frequencies=this.frequenciesService.getFrequencies().subscribe(f=>{this.frequencies=f});
+      this.teachers=this.teachersService.getTeachers().subscribe(t=>{this.teachers=t})
+      this.programs=this.programsService.getPrograms().subscribe(p=>{this.programs=p})
+      this.periods=this.periodsService.getPeriods().subscribe(p=>{this.periods=p})
+      
+      const params=this.activatedRoute.snapshot.params;
+      console.log(params)
+      this.crn = params['id'];
 
-    this.schedules=this.schedulesService.getSchedules().subscribe(s=>{this.schedules=s});
-    this.frequencies=this.frequenciesService.getFrequencies().subscribe(f=>{this.frequencies=f});
-    this.teachers=this.teachersService.getTeachers().subscribe(t=>{this.teachers=t})
-    this.programs=this.programsService.getPrograms().subscribe(p=>{this.programs=p})
-    this.periods=this.periodsService.getPeriods().subscribe(p=>{this.periods=p})
-    
-    const params=this.activatedRoute.snapshot.params;
-    console.log(params)
-    this.crn = params['id'];
-
-    if(this.crn)
-    {
-      this.coursesService.getCourse(this.crn).subscribe
-      (
-        res => 
-        {
-          console.log(res)
-          this.course=res;
-          this.edit=true;
-          
-          this.dateString = formatDate(this.course.startingDate!, 'yyyy-MM-dd', this.locale)
-          console.log(this.dateString);
-        },
-        err => console.error(err)
-      )
+      if(this.crn)
+      {
+        this.coursesService.getCourse(this.crn).subscribe
+        (
+          res => 
+          {
+            console.log(res)
+            this.course=res;
+            this.edit=true;
+            
+            this.dateString = formatDate(this.course.startingDate!, 'yyyy-MM-dd', this.locale)
+            console.log(this.dateString);
+          },
+          err => console.error(err)
+        )
+      }
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
     }
   }
 

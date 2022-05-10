@@ -28,9 +28,9 @@ export class UsersService {
     return this.http.post('http://localhost:5000/api/users/',user);
    }
 
-   deleteUser(UserId:string)
+   deleteUser(Email : string)
    {
-    return this.http.delete('http://localhost:5000/api/users/'+UserId);
+    return this.http.delete('http://localhost:5000/api/users/'+ Email);
    }
 
    updateUser(UserId:string | number, user:User):Observable<User>

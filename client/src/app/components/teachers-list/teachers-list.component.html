@@ -5,7 +5,7 @@
     <br>
     <div class="card text-center">
         <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center" >
-            Teacher Id: {{teacher.teacherId}}
+            {{teacher.teacherId}}
             <button class="btn btn-danger" (click)="deleteTeacher(teacher.teacherId)"><i class="fa-solid fa-minus"></i></button>
         </div>
         <img [src]="teacher.photourl" class="card-img-top" width="720" height="420">
@@ -17,7 +17,7 @@
             <p>{{teacher.rfc}} </p>
             <p>{{teacher.email}} </p>
             <p>{{teacher.phoneNumber}} </p>
-            <a [routerLink]="['/teachers/edit',teacher.teacherId,teacher.userId]" class="btn btn-info btn-block"><i class="fa-solid fa-pencil"></i></a>
+            <a [routerLink]="['/teachers/edit',teacher.teacherId,teacher.userId]" class="btn btn-info"><i class="fa-solid fa-pencil"></i></a>
         </div>
     </div>
 </div>

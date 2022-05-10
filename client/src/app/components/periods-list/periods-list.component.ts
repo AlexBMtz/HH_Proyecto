@@ -1,4 +1,6 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { PeriodsService } from 'src/app/services/periods.service';
 
 @Component({
@@ -9,10 +11,18 @@ import { PeriodsService } from 'src/app/services/periods.service';
 export class PeriodsListComponent implements OnInit {
   @HostBinding('class') classes='row';
   periods:any=[];
-  constructor(private periodService:PeriodsService) { }
+  constructor(private periodService:PeriodsService, private router : Router,
+    private loginService : LoginService) { }
 
   ngOnInit(): void {
-    this.listPeriods();
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      this.listPeriods();
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
   }
 
   listPeriods(){

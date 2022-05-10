@@ -8,10 +8,8 @@
       <input type="text" class="form-control" name = "email" [(ngModel)]="login.email" placeholder="Correo electrónico"> 
         <br>
       <label for="Password">Contraseña</label>
-      <input type="text" class="form-control" name = "password" [(ngModel)]="login.password" placeholder="Contraseña"> 
-
-        <br>
+      <input type="password" class="form-control" name = "password" [(ngModel)]="login.password" placeholder="Contraseña"> 
+      <br>
       <button class="offset-md-5 btn btn-success" type="submit" (click) = "Login()">  Log in   </button>  
-      <!--<button class="offset-md-5" type="submit" (click) = "Login(), Save()">  Log in   </button>  -->
     </form>
 </div>

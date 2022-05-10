@@ -1,4 +1,6 @@
 import { Component, OnInit,HostBinding} from '@angular/core';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/services/login.service';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -11,14 +13,22 @@ export class UsersListComponent implements OnInit {
   @HostBinding('classs') classes = 'row';
   users: any = {};
   roles: any={};
-  constructor(private userService:UsersService) 
+  constructor(private userService:UsersService, private router : Router,
+    private loginService : LoginService) 
   {
 
    }
 
   ngOnInit(): void 
   {
-    this.listUser();
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      this.listUser();
+    }
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
   }
 
   listUser()

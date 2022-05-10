@@ -1,6 +1,7 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 import { Router, ActivatedRoute} from '@angular/router';
 import { Schedule } from 'src/app/models/Schedule';
+import { LoginService } from 'src/app/services/login.service';
 import { SchedulesService } from 'src/app/services/schedules.service';
 
 @Component({
@@ -21,25 +22,34 @@ export class SchedulesFormComponent implements OnInit {
 
   constructor(private schedulesService:SchedulesService, 
     private router:Router,
-    private activatedRoute:ActivatedRoute) { }
+    private activatedRoute:ActivatedRoute,
+    private loginService : LoginService) { }
 
   ngOnInit(): void {
-    const params=this.activatedRoute.snapshot.params;
-    //console.log(params);
-    if(params['scheduleId'])
-    {
-      this.schedulesService.getSchedule(params['scheduleId']).subscribe
-      (
-        res => 
-        {
-          console.log(res)
-          this.schedule=res;
-          this.edit=true;
-        },
-        err => console.error(err)
-      )
+    var role = this.loginService.getCookie()
+    if(role == '3'){
+      const params=this.activatedRoute.snapshot.params;
+      //console.log(params);
+      if(params['scheduleId'])
+      {
+        this.schedulesService.getSchedule(params['scheduleId']).subscribe
+        (
+          res => 
+          {
+            console.log(res)
+            this.schedule=res;
+            this.edit=true;
+          },
+          err => console.error(err)
+        )
+      }
+      this.schedulesService.getSchedules().subscribe(s=>{this.rows=s});
     }
-    this.schedulesService.getSchedules().subscribe(s=>{this.rows=s});
+    else{
+      alert("No tienes permisos para acceder a este apartado.")
+      this.router.navigate(['/'])
+    }
+    
   }
 
   validateSchedule(){
