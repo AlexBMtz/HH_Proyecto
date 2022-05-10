@@ -89,14 +89,20 @@ export class CoursesFormComponent implements OnInit
 
   saveNewCourse()
   {
-    this.coursesService.saveCourse(this.course).subscribe(
-      res =>{
-        console.log(this.course)
-        console.log(res);
-        this.router.navigate(['/courses']);
-      },
-      err => console.error(err)
-    );
+    if(this.course.courseName != '' && this.course.frequencyId != '' && this.course.periodId != '' && 
+    this.course.programId != '' && this.course.scheduleId != '' && this.course.teacherId != ''){
+      this.coursesService.saveCourse(this.course).subscribe(
+        res =>{
+          console.log(this.course)
+          console.log(res);
+          this.router.navigate(['/courses']);
+        },
+        err => console.error(err)
+      );
+    }
+    else{
+      alert("Por favor completa todos los registros.")
+    }
   }
 
   updateCourse(){

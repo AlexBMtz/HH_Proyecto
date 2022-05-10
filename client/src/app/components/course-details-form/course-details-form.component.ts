@@ -72,32 +72,37 @@ export class CourseDetailsFormComponent implements OnInit {
   }
 
   saveNewCourseDetail() {
-    delete this.courseDetail.final_Grade;
-    this.courseDetail.courseId = this.crn;
+    if(this.courseDetail.studentId != ''){
+      delete this.courseDetail.final_Grade;
+      this.courseDetail.courseId = this.crn;
 
-    console.log(this.courseDetail);
-    
-    for (let i = 0; i < this.details.length; i++) {
-      if (this.details[i].studentId == this.courseDetail.studentId) {
-        this.exists = true;
-        break;
+      console.log(this.courseDetail);
+      
+      for (let i = 0; i < this.details.length; i++) {
+        if (this.details[i].studentId == this.courseDetail.studentId) {
+          this.exists = true;
+          break;
+        }
+        else{
+          this.exists = false;
+        }
+      }
+
+      if(!this.exists){
+        this.courseDetailService.createCourseDetail(this.courseDetail).subscribe(
+          res => {
+            console.log(res);
+            this.router.navigate(['/courseDetails', this.crn]);
+          },
+          err => console.error(err)
+        );
       }
       else{
-        this.exists = false;
+        alert("No puede inscribir a un alumno ya inscrito en este u otro curso.")
       }
     }
-
-    if(!this.exists){
-      this.courseDetailService.createCourseDetail(this.courseDetail).subscribe(
-        res => {
-          console.log(res);
-          this.router.navigate(['/courseDetails', this.crn]);
-        },
-        err => console.error(err)
-      );
-    }
     else{
-      alert("No puede inscribir a un alumno ya inscrito en este u otro curso.")
+      alert("Por favor completa todos los registros.")
     }
   }
 

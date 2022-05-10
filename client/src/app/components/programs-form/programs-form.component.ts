@@ -81,16 +81,20 @@ export class ProgramsFormComponent implements OnInit {
   
     saveNewProgram()
     {
-      delete this.program.programId;
-  
-      //console.log(this.teacher);
-      this.programService.saveProgram(this.program).subscribe(
-        res =>{
-          console.log(res);
-          this.router.navigate(['/programs']);
-        },
-        err => console.error(err)
-      );
+      if(this.program.program != ''){
+        delete this.program.programId;
+        this.programService.saveProgram(this.program).subscribe(
+          res =>{
+            console.log(res);
+            this.router.navigate(['/programs']);
+          },
+          err => console.error(err)
+        );
+      }
+      else{
+        alert("Por favor completa todos los registros.")
+      }
+      
     }
   
     updateProgram(){

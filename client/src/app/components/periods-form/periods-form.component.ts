@@ -79,16 +79,20 @@ export class PeriodsFormComponent implements OnInit {
 
     saveNewPeriod()
     {
-      delete this.period.periodId;
-  
-      //console.log(this.teacher);
-      this.periodService.savePeriod(this.period).subscribe(
-        res =>{
-          console.log(res);
-          this.router.navigate(['/periods']);
-        },
-        err => console.error(err)
-      );
+      if(this.period.period != ''){
+        delete this.period.periodId;
+    
+        this.periodService.savePeriod(this.period).subscribe(
+          res =>{
+            console.log(res);
+            this.router.navigate(['/periods']);
+          },
+          err => console.error(err)
+        );
+      }
+      else{
+        alert("Por favor completa todos los registros.")
+      }
     }
   
     updatePeriod(){

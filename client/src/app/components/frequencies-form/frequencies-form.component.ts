@@ -81,16 +81,21 @@ export class FrequenciesFormComponent implements OnInit {
 
   saveNewFrequency()
   {
-    delete this.frequency.frequencyId;
+    if(this.frequency.frequency != ''){
+        delete this.frequency.frequencyId;
 
-    //console.log(this.teacher);
-    this.frequenciesService.saveFrequency(this.frequency).subscribe(
-      res =>{
-        console.log(res);
-        this.router.navigate(['/frequencies']);
-      },
-      err => console.error(err)
-    );
+      this.frequenciesService.saveFrequency(this.frequency).subscribe(
+        res =>{
+          console.log(res);
+          this.router.navigate(['/frequencies']);
+        },
+        err => console.error(err)
+      );
+    }
+    else{
+      alert("Por favor completa todos los registros.")
+    }
+    
   }
 
   updateFrequency(){
